@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="card" style="margin-bottom: 30px">
-        <h5 class="card-header">Hành động & Bộ lọc</h5>
+        <h5 class="card-header">Hành động & Bộ lọc <a href="{{route('admin.category.create')}}">Thêm mới</a></h5>
         <div class="row">
             <div class="col-sm-3">
                 <div class="row mb-3 p-md-3">

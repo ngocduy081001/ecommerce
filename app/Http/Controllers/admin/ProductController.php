@@ -5,7 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\Color;
+use App\Models\ColorSize;
+use App\Models\GroupOption;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -42,22 +46,52 @@ class ProductController extends Controller
     }
     public function create()
     {
+
         $category = $this->category->where('parent', 0)->with('children')->get()->toArray();
         $result = self::recursiveCategory($category);
-        return view('server.page.product.create', compact('result'));
+        $color = Color::all();
+        $size = Size::all();
+        return view('server.page.product.create', compact('result', 'color', 'size'));
     }
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        $this->product->create($request->all());
-        alert()->success('Title', config('message.post_success'));
-        return view('server.page.product.grid');
+
+
+
+        $product =    $this->product->create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'alt' => $request->name,
+            'description' => $request->descrtiption,
+            'detail' => $request->detail,
+            'category_id' => (int) $request->category_id,
+            'stock' => $request->stock_default,
+            'price' => $request->price_default,
+            'price_sale' => $request->price_sale
+        ]);
+        $code = generateCode($product->id, 'SP');
+
+        $this->product->find($product->id)->update(['code' => $code]);
+        foreach ($request->size_color as $key => $item) {
+            $arr = explode(',', $item);
+            ColorSize::create([
+                'product_id' => $product->id,
+                'color_id' => $arr[1],
+                'size_id' => $arr[0],
+                'image' => $request->image[$key],
+                'price' =>  $request->price[$key]
+            ]);
+        }
+        alert()->success('Thành công', config('message.post_success'));
+
+        return redirect()->route('admin.product.index');
     }
     public function edit($id)
     {
 
         $category = $this->category->where('parent', 0)->with('children')->get()->toArray();
         $result = self::recursiveproduct($category);
-      
+
         return view('server.page.product.edit')
             ->with('data', $this->product->findOrFail($id))
             ->with('result', $result);
@@ -124,5 +158,12 @@ class ProductController extends Controller
         }
 
         return view('server.page.product.grid-item')->with('data', $result->paginate($perPage));
+    }
+
+    public function config($id)
+    {
+        return view('server.page.product.config')
+            ->with('id', $id)
+            ->with('group_options', GroupOption::with('option')->get());
     }
 }

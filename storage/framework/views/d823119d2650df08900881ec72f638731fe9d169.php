@@ -4,7 +4,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="card" style="margin-bottom: 30px">
-        <h5 class="card-header">Hành động & Bộ lọc   
+        <h5 class="card-header">Hành động & Bộ lọc
             <button class="btn btn-info"><a href="<?php echo e(route('admin.user.create')); ?>">Thêm mới</a></button>
         </h5>
         <div class="row">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="row mb-3 p-md-3">
-                 
+
                     <div class="col-sm-3">
                         <select name="status" id="status" onchange="return search()" class="form-control">
                             <option disabled selected>Trạng thái</option>
@@ -98,13 +98,13 @@
                             <td>
                                 <ul class="list-unstyled">
                                     <?php $__currentLoopData = $item->roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <li> <span class="badge bg-label-info"><?php echo e($role->name); ?></span></li>                                     
+                                        <li> <span class="badge bg-label-info"><?php echo e($role->name); ?></span></li>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
 
                             </td>
                             <td>
-                                <img src="<?php echo e(asset('storage/app/'.$item->avatar)); ?>" alt="" title=""></a>
+                                <img width="50px" src="<?php echo e(asset('storage/avatars/'.$item->avatar)); ?>" alt="Anh dai dien " title=" Anh dai dien"></a>
                             </td>
 
 

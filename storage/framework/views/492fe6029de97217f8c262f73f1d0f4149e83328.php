@@ -2,11 +2,12 @@
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
     data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
-<head>
+<>
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta name="token" content="<?php echo e(csrf_token()); ?>">
+   
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title><?php echo $__env->yieldContent('title'); ?></title>
 
     <meta name="description" content="" />
@@ -17,7 +18,7 @@
     <?php echo $__env->make('server.partial.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->yieldContent('page-css'); ?>
-    
+    <script src="<?php echo e(asset('filemanager/bundle/filemanager.min.js')); ?>"></script><script> filemanager.baseUrl = '<?php echo e(route('filemanager.base_route')); ?>';</script>
 </head>
 
 <body>
@@ -63,6 +64,7 @@
     </div>
     <!-- / Layout wrapper -->
     <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
 </body>
 
 </html>

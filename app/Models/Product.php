@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory,SoftDeletes;
 
     protected $table = 'product';
-    protected $fillable = ['id','name','status','slug','description','alt','detail','price','price_sale','stock','thumb','image','image_detail_id','view'];
+    protected $fillable = ['id','name','status','slug','description','alt','detail','view','category_id','code'];
 
     public function category():BelongsTo
     {

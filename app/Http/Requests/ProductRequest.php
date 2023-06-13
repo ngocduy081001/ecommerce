@@ -26,16 +26,16 @@ class ProductRequest extends FormRequest
 
         return [
             'name' => ['required', 'unique:App\Models\Product,name,' . $this->id],
-            'slug' => ['required', 'unique:App\Models\Product,slug,' . $this->id],
-            'alt' => ['required'],
+            'slug' => ['required', 'unique:App\Models\Product,slug,' . $this->id],          
             'description' => ['required'],
             'detail' => ['required'],
-            'price' => ['required','regex:/^(\d+|\d+(\.\d{1,2})?|(\.\d{1,2}))$/' ],
-            'price_sale' => [ 'numeric','gt:price'],
-            'stock' => ['required','alpha_num'],
-            'image' => ['required','image','mimes:png,jpg'],
-            // 'image_detail' => ['required','image','mimes:png,jpg'],
-            'category_id' => ['required','exists:App\Models\Category,id'],
+            'price_default' => ['required', 'numeric'],
+            'price.*' => ['required', 'numeric'],
+            'price_sale' => ['numeric', 'gt:price'],
+            'stock.*' => ['required','alpha_num'],
+            'stock_default' => ['required','alpha_num'],
+            'image.*' => ['required'],
+            'category_id' => ['required', 'exists:App\Models\Category,id'],
         ];
     }
 
@@ -45,8 +45,8 @@ class ProductRequest extends FormRequest
             'required' => ':attribute là bắt buộc',
             'unique' => ':attribute đã tồn tại',
             'exists' => ':attribute không tồn tại',
-            'image' => ':attrubute không phải là ảnh',
-            'alpha_num' => ':attrubute không phải là số',
+            'image' => ':attribute không phải là ảnh',
+            'alpha_num' => ':attribute không phải là số',
             'mimes' => ':attributes phải là kiểu png , jpg'
         ];
     }
@@ -65,7 +65,6 @@ class ProductRequest extends FormRequest
             'thumb' => 'Ảnh thumb',
             'image' => 'Ảnh đại diện',
             'category_id' => 'Danh mục sản phẩm'
-            
         ];
     }
 }

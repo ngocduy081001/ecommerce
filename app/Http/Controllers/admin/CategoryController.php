@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryReqest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Resources\CategoryCollection;
@@ -44,11 +44,13 @@ class CategoryController extends Controller
         array_push($result, ['id' => 0, 'title' => 'root']);
         return view('server.page.category.create', compact('result'));
     }
-    public function store(CategoryReqest $request)
+    public function store(CategoryRequest $request)
     {
-        $this->category->create($request->all());
-        alert()->success('Title', config('message.post_success'));
-        return view('server.page.category.grid');
+        $a =     $this->category->create($request->all());
+        if ($a) {
+            alert()->success('Thành công', config('message.post_success'));
+            return redirect()->route('admin.category.index');
+        }
     }
     public function edit($id)
     {

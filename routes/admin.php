@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('product/destroy/list', 'App\Http\Controllers\admin\ProductController@destroyList')->name('product.destroy.list');
     Route::delete('product/destroy/list', 'App\Http\Controllers\admin\ProductController@destroyList')->name('product.destroy.list');
 
+    Route::get('product/config/{id}', 'App\Http\Controllers\admin\ProductController@config')->name('product.config');
+    Route::post('product/config/{id}', 'App\Http\Controllers\admin\ProductController@postConfig')->name('product.config');
 
     // role
 

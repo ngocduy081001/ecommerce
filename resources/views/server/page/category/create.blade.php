@@ -11,7 +11,8 @@
             <div class="card mb-4">
                 <div class="card-body">
 
-                    <form id="form" action="{{ route('admin.category.store') }}" method="POST">
+                    <form action="{{ route('admin.category.store') }}" method="POST">
+                        {{ csrf_field() }}
                         @if ($errors->any())
                             <div class="alert alert-danger" role="alert">
                                 <ul>
@@ -21,12 +22,12 @@
                                 </ul>
                             </div>
                         @endif
-                        @csrf
+
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="name">Tên danh mục</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="name" name="name"
-                                    onkeydown="changeAlias(this)" onchange="changeAlias(this)"
+                                    onkeyup="changeAlias(this)" onchange="changeAlias(this)"
                                     placeholder="Nhập tên danh mục ">
                             </div>
                         </div>
@@ -47,8 +48,9 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="parent">Vị trí</label>
                             <div class="col-sm-10">
-                                <input type="text" id="select" name="parent" class="form-control"
-                                    placeholder="Lựa chọn vị trí" id="parent">
+                                <input type="text" id="select" class="form-control" placeholder="Lựa chọn vị trí"
+                                    id="parent">
+                                <input type="hidden" id="parent-value" name="parent" value="">
                             </div>
 
                         </div>
@@ -72,13 +74,14 @@
     <script src="{{ asset('server/libs/select-tree/comboTreePlugin.js') }}"></script>
     <script>
         let data = @json($result);
-    
+
         let select = $('#select').comboTree({
             source: data,
 
         });
-        $('#form').submit(function() {
-            $('#select').val(select.getSelectedIds());
+
+        $('#select').change(function() {
+            $('#parent-value').val(select.getSelectedIds());
         })
 
 

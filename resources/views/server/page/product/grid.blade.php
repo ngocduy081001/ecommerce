@@ -4,7 +4,9 @@
 @endsection
 @section('content')
     <div class="card" style="margin-bottom: 30px">
-        <h5 class="card-header">Hành động & Bộ lọc</h5>
+        <h5 class="card-header">Hành động & Bộ lọc
+            <a href="{{ route('admin.product.create') }}">Thêm mới</a>
+        </h5>
         <div class="row">
             <div class="col-sm-3">
                 <div class="row mb-3 p-md-3">
@@ -44,7 +46,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        
+
                     </div>
                 </div>
             </div>
@@ -60,7 +62,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        
+
                     </div>
                 </div>
             </div>
@@ -107,10 +109,10 @@
                                 /{{ $item->slug }}
                             </td>
                             <td><span class="badge bg-label-primary me-1">
-                                    @if ($item->parent === '0')
+                                    @if ($item->category === '0')
                                         Root
                                     @else
-                                        {{ $item->parentItem->name }}
+                                        {{ $item->category->name }}
                                     @endif
 
                                 </span></td>
@@ -122,11 +124,13 @@
                                 </div>
                             </td>
                             <td>
+
+
                                 <a style="padding: 0.5em" class="btn btn-outline-primary"
-                                    href="{{ route('admin.category.edit', $item->id) }}"><i class="bx bx-edit-alt me-1"></i>
+                                    href="{{ route('admin.product.edit', $item->id) }}"><i class="bx bx-edit-alt me-1"></i>
                                     Sửa</a>
                                 <a style="padding: 0.5em" class="btn btn-outline-danger"
-                                    href="{{ route('admin.category.destroy', $item->id) }}" data-id="{{ $item->id }}"
+                                    href="{{ route('admin.product.destroy', $item->id) }}" data-id="{{ $item->id }}"
                                     data-confirm-delete="true"><i class="bx bx-trash me-1"></i>
                                     Xoá</a>
                             </td>
@@ -242,12 +246,12 @@
             let perPage = $('#perPage').val();
             if (perPage != null) {
                 data['perPage'] = perPage
-            }else{
+            } else {
                 data['perPage'] = 10
             }
             $.ajax({
                 type: "get",
-                url: "{{ route('admin.category.search') }}",
+                url: "{{ route('admin.product.search') }}",
                 data: data,
                 success: function(response) {
                     if (response == '') {

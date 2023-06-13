@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="card" style="margin-bottom: 30px">
-        <h5 class="card-header">Hành động & Bộ lọc   
+        <h5 class="card-header">Hành động & Bộ lọc
             <button class="btn btn-info"><a href="{{ route('admin.user.create') }}">Thêm mới</a></button>
         </h5>
         <div class="row">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-sm-9">
                 <div class="row mb-3 p-md-3">
-                 
+
                     <div class="col-sm-3">
                         <select name="status" id="status" onchange="return search()" class="form-control">
                             <option disabled selected>Trạng thái</option>
@@ -96,13 +96,13 @@
                             <td>
                                 <ul class="list-unstyled">
                                     @foreach ($item->roles as $role)
-                                        <li> <span class="badge bg-label-info">{{ $role->name }}</span></li>                                     
+                                        <li> <span class="badge bg-label-info">{{ $role->name }}</span></li>
                                     @endforeach
                                 </ul>
 
                             </td>
                             <td>
-                                <img src="{{ asset('storage/app/'.$item->avatar) }}" alt="" title=""></a>
+                                <img width="50px" src="{{ asset('storage/avatars/'.$item->avatar) }}" alt="Anh dai dien " title=" Anh dai dien"></a>
                             </td>
 
 

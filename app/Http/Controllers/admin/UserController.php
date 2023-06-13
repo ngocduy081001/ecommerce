@@ -19,7 +19,7 @@ class UserController extends Controller
     public function __construct(User $user, Role $role)
     {
         $this->middleware('role:Super Admin');
- 
+
         // $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
         // $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
         // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
@@ -78,9 +78,10 @@ class UserController extends Controller
 
         if ($request->hasFile('avatar')) {
 
-            $link =   Storage::putFile('images/avatar', $request->file('avatar'));
+            $request->file('avatar')->store('public/avatars');
+            $link = $request->file('avatar')->hashName();;
         }
-     
+        
 
         $user =   $this->user->findOrFail($id);
         if ($user) {

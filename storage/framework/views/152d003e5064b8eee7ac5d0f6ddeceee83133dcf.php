@@ -1,0 +1,1 @@
+<?php /**PATH D:\web_ban_hang\ecommerce\resources\views/server/page/product/detail.blade.php ENDPATH**/ ?>

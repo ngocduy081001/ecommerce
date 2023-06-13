@@ -36,7 +36,10 @@
         (function($) {
             $(document).ready(function() {
                 $('.menu-item .active').parent().parent().addClass(
-                        'active open');
+                    'active open');
             });
         })(jQuery);
+        $('#form').on('submit', function() {
+            $('button[type="submit"]').attr('disabled', 'true');
+        });
     </script>
