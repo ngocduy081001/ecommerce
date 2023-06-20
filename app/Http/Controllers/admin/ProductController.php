@@ -9,6 +9,8 @@ use App\Models\Color;
 use App\Models\ColorSize;
 use App\Models\GroupOption;
 use App\Models\Product;
+use App\Models\ProductColor;
+use App\Models\ProductSize;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -46,7 +48,6 @@ class ProductController extends Controller
     }
     public function create()
     {
-
         $category = $this->category->where('parent', 0)->with('children')->get()->toArray();
         $result = self::recursiveCategory($category);
         $color = Color::all();
@@ -56,22 +57,33 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-
-
         $product =    $this->product->create([
             'name' => $request->name,
             'slug' => $request->slug,
             'alt' => $request->name,
-            'description' => $request->descrtiption,
+            'description' => $request->description,
             'detail' => $request->detail,
             'category_id' => (int) $request->category_id,
             'stock' => $request->stock_default,
             'price' => $request->price_default,
-            'price_sale' => $request->price_sale
+            'price_sale' => $request->price_sale ?? 0,
+            'image' => $request->avatar
         ]);
         $code = generateCode($product->id, 'SP');
 
         $this->product->find($product->id)->update(['code' => $code]);
+        foreach ($request->color as $key => $value) {
+            ProductColor::create([
+                'product_id' => $product->id,
+                'color_id' => $value
+            ]);
+        }
+        foreach ($request->size as $key => $value) {
+            ProductSize::create([
+                'product_id' => $product->id,
+                'size_id' => $value
+            ]);
+        }
         foreach ($request->size_color as $key => $item) {
             $arr = explode(',', $item);
             ColorSize::create([

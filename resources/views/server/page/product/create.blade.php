@@ -151,8 +151,8 @@
                                             <div class="col-sm-10">
                                                 @foreach ($color as $item)
                                                     <div class="form-check form-check-inline mt-3 ">
-                                                        <input name="color" value="{{ $item->id }}"
-                                                            data-value="{{ $item->name }}" class="form-check-input"
+                                                        <input name="color[]" value="{{ $item->id }}"
+                                                            data-value="{{ $item->name }}" class="color form-check-input"
                                                             onclick="return bien_the()" type="checkbox"
                                                             id="color-{{ $item->id }}" value="{{ $item->id }}">
                                                         <label class="form-check-label"
@@ -167,8 +167,8 @@
                                             <div class="col-sm-10">
                                                 @foreach ($size as $item)
                                                     <div class="form-check form-check-inline mt-3 ">
-                                                        <input name="size" value="{{ $item->id }}"
-                                                            data-value="{{ $item->name }}" class="form-check-input"
+                                                        <input name="size[]" value="{{ $item->id }}"
+                                                            data-value="{{ $item->name }}" class="size form-check-input"
                                                             onclick="return bien_the()" type="checkbox"
                                                             id="size-{{ $item->id }}" value="{{ $item->id }}">
                                                         <label class="form-check-label"
@@ -342,8 +342,8 @@
             }
             let bien_the = function(e) {
 
-                let size = $('input:checkbox[name=size]:checked');
-                let color = $('input:checkbox[name=color]:checked')
+                let size = $('.size:checked');
+                let color = $('.color:checked')
                 let sizeArr = [];
                 let colorArr = [];
                 size.each(function() {
@@ -423,20 +423,6 @@
             let d = function(e) {
                 let id = $(e).data('id')
                 filemanager.selectFile("sp-" + id)
-            }
-
-            let getTable = function(e) {
-                let tr = $('tr');
-                let arr = [];
-                tr.each(function(e) {
-                    console.log(e);
-                    arr.push([
-
-                    ])
-                })
-
-
-
             }
         </script>
 

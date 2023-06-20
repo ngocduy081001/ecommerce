@@ -10,4 +10,10 @@ class Size extends Model
     use HasFactory;
     protected $table = 'size';
     protected $fillable = ['name'];
+
+    
+    public function hasProduct()
+    {
+        return $this->hasMany('App\Models\ProductSize','size_id','id');
+    }
 }

@@ -167,6 +167,8 @@ return [
          */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        
+       // Elasticquent\ElasticquentServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -234,6 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        //'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
 
     ],
 

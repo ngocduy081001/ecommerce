@@ -149,8 +149,8 @@
                                             <div class="col-sm-10">
                                                 <?php $__currentLoopData = $color; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div class="form-check form-check-inline mt-3 ">
-                                                        <input name="color" value="<?php echo e($item->id); ?>"
-                                                            data-value="<?php echo e($item->name); ?>" class="form-check-input"
+                                                        <input name="color[]" value="<?php echo e($item->id); ?>"
+                                                            data-value="<?php echo e($item->name); ?>" class="color form-check-input"
                                                             onclick="return bien_the()" type="checkbox"
                                                             id="color-<?php echo e($item->id); ?>" value="<?php echo e($item->id); ?>">
                                                         <label class="form-check-label"
@@ -165,8 +165,8 @@
                                             <div class="col-sm-10">
                                                 <?php $__currentLoopData = $size; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <div class="form-check form-check-inline mt-3 ">
-                                                        <input name="size" value="<?php echo e($item->id); ?>"
-                                                            data-value="<?php echo e($item->name); ?>" class="form-check-input"
+                                                        <input name="size[]" value="<?php echo e($item->id); ?>"
+                                                            data-value="<?php echo e($item->name); ?>" class="size form-check-input"
                                                             onclick="return bien_the()" type="checkbox"
                                                             id="size-<?php echo e($item->id); ?>" value="<?php echo e($item->id); ?>">
                                                         <label class="form-check-label"
@@ -340,8 +340,8 @@
             }
             let bien_the = function(e) {
 
-                let size = $('input:checkbox[name=size]:checked');
-                let color = $('input:checkbox[name=color]:checked')
+                let size = $('.size:checked');
+                let color = $('.color:checked')
                 let sizeArr = [];
                 let colorArr = [];
                 size.each(function() {
@@ -421,20 +421,6 @@
             let d = function(e) {
                 let id = $(e).data('id')
                 filemanager.selectFile("sp-" + id)
-            }
-
-            let getTable = function(e) {
-                let tr = $('tr');
-                let arr = [];
-                tr.each(function(e) {
-                    console.log(e);
-                    arr.push([
-
-                    ])
-                })
-
-
-
             }
         </script>
 

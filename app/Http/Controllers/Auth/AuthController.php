@@ -36,4 +36,10 @@ class AuthController extends Controller
     public function postRegister(UserRequest $request)
     {
     }
+
+    public function logOut()
+    {
+        Auth::logout();
+        return redirect()->back();
+    }
 }
