@@ -1,0 +1,25 @@
+:root {
+    --primary-color: #f4f0ec;
+    --secondary-color: #e3deda;
+    --tertiary-color: #e7e4eb;
+    --text-color: #0d1821;
+    --container-max: 1440px;
+    --container-big: 1400px;
+    --container-small: 1000px;
+    --container-min: 600px;
+    --pd: 20px;
+    --pd-sm: 15px;
+}
+
+body {
+    background-color: #fff !important;
+}
+
+header {
+    background-color: var(--primary-color) !important;
+}
+
+.container {
+    max-width: var(--container-max) !important;
+    width: 100%;
+}
