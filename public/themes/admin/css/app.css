@@ -1,0 +1,3 @@
+label.required:after {
+    color: red !important;
+}

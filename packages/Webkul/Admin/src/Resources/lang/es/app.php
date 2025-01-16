@@ -4112,6 +4112,7 @@ return [
                 'transactions'             => 'Transacciones',
                 'url-rewrites'             => 'Reescrituras de URL',
                 'users'                    => 'Usuarios',
+                'banners'                  => 'Banners',
             ],
         ],
 

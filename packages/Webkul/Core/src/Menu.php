@@ -55,7 +55,7 @@ class Menu
         switch ($area) {
             case self::ADMIN:
                 $this->configMenu = $configMenu
-                    ->filter(fn ($item) => bouncer()->hasPermission($item['key']))
+                    ->filter(fn($item) => bouncer()->hasPermission($item['key']))
                     ->toArray();
                 break;
 
@@ -63,7 +63,7 @@ class Menu
                 $canShowWishlist = ! (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 
                 $this->configMenu = $configMenu
-                    ->reject(fn ($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
+                    ->reject(fn($item) => $item['key'] == 'account.wishlist' && $canShowWishlist)
                     ->toArray();
                 break;
 
@@ -119,7 +119,7 @@ class Menu
     {
         return collect($menuItem)
             ->sortBy('sort')
-            ->filter(fn ($value) => is_array($value))
+            ->filter(fn($value) => is_array($value))
             ->map(function ($subMenuItem) {
                 $subSubMenuItems = $this->processSubMenuItems($subMenuItem);
 

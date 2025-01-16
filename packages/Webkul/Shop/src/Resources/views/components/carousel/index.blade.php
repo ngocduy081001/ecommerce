@@ -1,6 +1,6 @@
-@props(['options'])
+@props(['options', 'class'])
 
-<v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
+<v-carousel :images="{{ json_encode($options['images'] ?? []) }}" :class="$class">
     <div class="overflow-hidden">
         <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
     </div>
@@ -11,7 +11,7 @@
         type="text/x-template"
         id="v-carousel-template"
     >
-        <div class="relative m-auto flex w-full overflow-hidden">
+        <div class="relative m-auto flex w-full overflow-hidden {{ isset($class) ? $class : '' }}">
             <!-- Slider -->
             <div 
                 class="inline-flex translate-x-0 cursor-pointer transition-transform duration-700 ease-out will-change-transform"
@@ -104,8 +104,8 @@
                 this.slider = this.$refs.sliderContainer;
 
                 if (
-                    this.$refs.slide
-                    && typeof this.$refs.slide[Symbol.iterator] === 'function'
+                    this.$refs.slide &&
+                    typeof this.$refs.slide[Symbol.iterator] === 'function'
                 ) {
                     this.slides = Array.from(this.$refs.slide);
                 }
@@ -124,7 +124,8 @@
                     }
 
                     this.slides.forEach((slide, index) => {
-                        slide.querySelector('img')?.addEventListener('dragstart', (e) => e.preventDefault());
+                        slide.querySelector('img')?.addEventListener('dragstart', (e) => e
+                            .preventDefault());
 
                         slide.addEventListener('mousedown', this.handleDragStart);
 
@@ -138,7 +139,9 @@
 
                         slide.addEventListener('mousemove', this.handleDrag);
 
-                        slide.addEventListener('touchmove', this.handleDrag, { passive: true });
+                        slide.addEventListener('touchmove', this.handleDrag, {
+                            passive: true
+                        });
                     });
 
                     window.addEventListener('resize', this.setPositionByIndex);
@@ -153,7 +156,7 @@
                 },
 
                 handleDrag(event) {
-                    if (! this.isDragging) {
+                    if (!this.isDragging) {
                         return;
                     }
 
@@ -173,22 +176,22 @@
 
                     if (this.direction == 'ltr') {
                         if (
-                            movedBy < -100
-                            && this.currentIndex < this.slides.length - 1
+                            movedBy < -100 &&
+                            this.currentIndex < this.slides.length - 1
                         ) {
                             this.currentIndex += 1;
                         }
 
                         if (
-                            movedBy > 100
-                            && this.currentIndex > 0
+                            movedBy > 100 &&
+                            this.currentIndex > 0
                         ) {
                             this.currentIndex -= 1;
                         }
                     } else {
                         if (
-                            movedBy > 100
-                            && this.currentIndex < this.slides.length - 1
+                            movedBy > 100 &&
+                            this.currentIndex < this.slides.length - 1
                         ) {
                             if (Math.abs(this.currentIndex) != this.slides.length - 1) {
                                 this.currentIndex -= 1;
@@ -196,8 +199,8 @@
                         }
 
                         if (
-                            movedBy < -100
-                            && this.currentIndex < 0
+                            movedBy < -100 &&
+                            this.currentIndex < 0
                         ) {
                             this.currentIndex += 1;
                         }
@@ -255,9 +258,9 @@
                 },
 
                 prev() {
-                    this.currentIndex = this.direction == 'ltr'
-                        ? this.currentIndex > 0 ? this.currentIndex - 1 : 0
-                        : this.currentIndex < 0 ? this.currentIndex + 1 : 0;
+                    this.currentIndex = this.direction == 'ltr' ?
+                        this.currentIndex > 0 ? this.currentIndex - 1 : 0 :
+                        this.currentIndex < 0 ? this.currentIndex + 1 : 0;
                 },
 
                 navigateByPagination(index) {

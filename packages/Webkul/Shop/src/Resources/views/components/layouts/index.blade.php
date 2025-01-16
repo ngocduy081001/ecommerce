@@ -45,7 +45,7 @@
     </style>
 
     {!! view_render_event('bagisto.shop.layout.head.after') !!}
-    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/app.css?v=' . time()) }}">
 </head>
 
 <body>

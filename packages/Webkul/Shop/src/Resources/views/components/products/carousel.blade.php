@@ -1,8 +1,4 @@
-<v-products-carousel
-    src="{{ $src }}"
-    title="{{ $title }}"
-    navigation-link="{{ $navigationLink ?? '' }}"
->
+<v-products-carousel src="{{ $src }}" title="{{ $title }}" navigation-link="{{ $navigationLink ?? '' }}">
     <x-shop::shimmer.products.carousel :navigation-link="$navigationLink ?? false" />
 </v-products-carousel>
 

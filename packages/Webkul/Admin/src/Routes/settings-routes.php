@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\Settings\BannerController;
 use Webkul\Admin\Http\Controllers\Settings\ChannelController;
 use Webkul\Admin\Http\Controllers\Settings\CurrencyController;
 use Webkul\Admin\Http\Controllers\Settings\DataTransfer\ImportController;
@@ -219,6 +220,10 @@ Route::group(['middleware' => ['admin'], 'prefix' => config('app.admin_url')], f
 
                 Route::get('download-error-report/{id}', 'downloadErrorReport')->name('admin.settings.data_transfer.imports.download_error_report');
             });
+        });
+
+        Route::controller(BannerController::class)->prefix('banners')->group(function () {
+            Route::get('', 'index')->name('admin.settings.banners.index');
         });
     });
 });
