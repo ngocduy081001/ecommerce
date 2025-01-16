@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+
+Artisan::call('view:clear');
 /**
  * Store front routes.
  */

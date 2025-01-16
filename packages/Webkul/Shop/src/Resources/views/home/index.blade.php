@@ -19,6 +19,25 @@
 
     <!-- Loop over the theme customization -->
 
+    <div class="section-attribute-size">
+        <div class="container-fluid">
+            <div class="attribute-size_title">
+                <h2>Udforsk sofaer efter størrelse
+                </h2>
+            </div>
+            <div class="attribute-size_content">
+                <div class="item">
+                    <div class="item_image">
+                        <img src="https://cdn.sofacompany.com/media/contentmanager/content/246604_v2.png?width=450&height=450"
+                            alt="Sofa Small">
+                    </div>
+                    <div class="item_title">
+                        <span>4-personers sofaer <i class="fa-solid fa-arrow-right-long"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @foreach ($customizations as $customization)
         @php $data = $customization->options @endphp
 
@@ -31,21 +50,7 @@
             @break
 
             @case ($customization::STATIC_CONTENT)
-                <div class="section-services">
-                    <div class=" container-fluid">
-                        <div class="service-item">
-                            <div class="service-item_left">
-                                <img src="https://cdn.sofacompany.com/media/contentmanager/content/SOFACOMPANY-USP-GUARANTEE_21.svg?width=40&amp;height=40"
-                                    alt="USP Grid Block" loading="lazy" decoding="async" class="Image-Image"
-                                    style="width: 100%; height: 100%;">
-                            </div>
-                            <div class="service-item_right">
-                                <p>10 ÅRS GARANTI</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- <!-- push style -->
+                <!-- push style -->
                 @if (!empty($data['css']))
                     @push('styles')
                         <style>
@@ -57,7 +62,7 @@
                 <!-- render html -->
                 @if (!empty($data['html']))
                     {!! $data['html'] !!}
-                @endif --}}
+                @endif
             @break
 
             @case ($customization::CATEGORY_CAROUSEL)
