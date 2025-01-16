@@ -19,15 +19,6 @@
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.before') !!}
 
-        <v-desktop-category>
-            <div class="flex items-center gap-5">
-                <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
-
-                <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
-
-                <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
-            </div>
-        </v-desktop-category>
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.category.after') !!}
     </div>
@@ -193,8 +184,18 @@
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.profile.after') !!}
         </div>
     </div>
+
 </div>
 
+<v-desktop-category>
+    <div class="flex items-center gap-5">
+        <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
+
+        <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
+
+        <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
+    </div>
+</v-desktop-category>
 @pushOnce('scripts')
     <script
         type="text/x-template"

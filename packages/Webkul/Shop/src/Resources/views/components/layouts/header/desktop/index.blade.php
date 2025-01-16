@@ -1,3 +1,3 @@
-<div class="flex flex-wrap max-lg:hidden">
+<div class="container max-lg:hidden">
     <x-shop::layouts.header.desktop.bottom />
 </div>
