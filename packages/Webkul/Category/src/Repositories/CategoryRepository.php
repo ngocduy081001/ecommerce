@@ -27,6 +27,7 @@ class CategoryRepository extends Repository
      */
     public function getAll(array $params = [])
     {
+
         $queryBuilder = $this->query()
             ->select('categories.*')
             ->leftJoin('category_translations', 'category_translations.category_id', '=', 'categories.id');
@@ -34,11 +35,11 @@ class CategoryRepository extends Repository
         foreach ($params as $key => $value) {
             switch ($key) {
                 case 'name':
-                    $queryBuilder->where('category_translations.name', 'like', '%'.urldecode($value).'%');
+                    $queryBuilder->where('category_translations.name', 'like', '%' . urldecode($value) . '%');
 
                     break;
                 case 'description':
-                    $queryBuilder->where('category_translations.description', 'like', '%'.urldecode($value).'%');
+                    $queryBuilder->where('category_translations.description', 'like', '%' . urldecode($value) . '%');
 
                     break;
                 case 'status':
@@ -55,7 +56,10 @@ class CategoryRepository extends Repository
                     break;
                 case 'locale':
                     $queryBuilder->where('category_translations.locale', $value);
+                    break;
+                case 'home':
 
+                    $queryBuilder->where('home', 1);
                     break;
             }
         }
@@ -239,7 +243,7 @@ class CategoryRepository extends Repository
     {
         if (isset($data[$type])) {
             foreach ($data[$type] as $imageId => $image) {
-                $file = $type.'.'.$imageId;
+                $file = $type . '.' . $imageId;
 
                 if (request()->hasFile($file)) {
                     if ($category->{$type}) {
@@ -250,7 +254,7 @@ class CategoryRepository extends Repository
 
                     $image = $manager->make(request()->file($file))->encode('webp');
 
-                    $category->{$type} = 'category/'.$category->id.'/'.Str::random(40).'.webp';
+                    $category->{$type} = 'category/' . $category->id . '/' . Str::random(40) . '.webp';
 
                     Storage::put($category->{$type}, $image);
 
@@ -321,5 +325,10 @@ class CategoryRepository extends Repository
         }
 
         return $data;
+    }
+
+    public function getHomeCategories()
+    {
+        return $this->model->where('home', 1)->orderBy('position', 'ASC')->limit(4)->get();
     }
 }

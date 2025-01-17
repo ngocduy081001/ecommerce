@@ -71,6 +71,13 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
     public const SERVICES_CONTENT = 'services_content';
 
     /**
+     * Category Grid.
+     *
+     * @var string
+     */
+    public const CATEGORY_GRID = 'category_grid';
+
+    /**
      * Cast options field to array.
      *
      * @var array

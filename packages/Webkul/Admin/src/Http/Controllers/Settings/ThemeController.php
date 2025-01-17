@@ -41,7 +41,7 @@ class ThemeController extends Controller
     {
         if (request()->has('id')) {
             $this->validate(request(), [
-                core()->getRequestedLocaleCode().'.options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
+                core()->getRequestedLocaleCode() . '.options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
             ]);
 
             $theme = $this->themeCustomizationRepository->find(request()->input('id'));
@@ -52,8 +52,8 @@ class ThemeController extends Controller
         $validated = $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
-            'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
-            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+            'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content,category_grid',
+            'channel_id' => 'required|in:' . implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
             'theme_code' => 'required',
         ]);
 
@@ -87,11 +87,12 @@ class ThemeController extends Controller
      */
     public function update(int $id)
     {
+
         $this->validate(request(), [
             'name'       => 'required',
             'sort_order' => 'required|numeric',
-            'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
-            'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
+            'type'       => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content,category_grid',
+            'channel_id' => 'required|in:' . implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
             'theme_code' => 'required',
         ]);
 
@@ -132,7 +133,7 @@ class ThemeController extends Controller
 
         $this->themeCustomizationRepository->delete($id);
 
-        Storage::deleteDirectory('theme/'.$id);
+        Storage::deleteDirectory('theme/' . $id);
 
         Event::dispatch('theme_customization.delete.after', $id);
 

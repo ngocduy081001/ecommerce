@@ -80,6 +80,7 @@ class CategoryController extends Controller
             'attributes',
             'logo_path',
             'banner_path',
+            'home',
         ]));
 
         Event::dispatch('catalog.category.create.after', $category);
@@ -123,6 +124,7 @@ class CategoryController extends Controller
             'display_mode',
             'status',
             'attributes',
+            'home',
             $categoryRequest->input('locale')
         ), $id);
 

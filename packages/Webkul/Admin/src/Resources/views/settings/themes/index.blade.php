@@ -2,31 +2,28 @@
     <x-slot:title>
         @lang('admin::app.settings.themes.index.title')
     </x-slot>
-   
+
     <div class="flex items-center justify-between">
         <p class="text-xl font-bold text-gray-800 dark:text-white">
             @lang('admin::app.settings.themes.index.title')
         </p>
-        
+
         <div class="flex items-center gap-x-2.5">
             <div class="flex items-center gap-x-2.5">
                 {!! view_render_event('bagisto.admin.settings.themes.create.before') !!}
 
                 <!-- Create Button -->
                 <v-create-theme-form>
-                    <button
-                        type="button"
-                        class="primary-button"
-                    >
+                    <button type="button" class="primary-button">
                         @lang('admin::app.settings.themes.index.create-btn')
-                    </button>  
+                    </button>
                 </v-create-theme-form>
 
                 {!! view_render_event('bagisto.admin.settings.themes.create.after') !!}
             </div>
         </div>
     </div>
-    
+
     {!! view_render_event('bagisto.admin.settings.themes.list.before') !!}
 
     <x-admin::datagrid :src="route('admin.settings.themes.index')" />
@@ -198,17 +195,20 @@
                             image_carousel: "@lang('admin::app.settings.themes.create.type.image-carousel')",
                             footer_links: "@lang('admin::app.settings.themes.create.type.footer-links')",
                             services_content: "@lang('admin::app.settings.themes.create.type.services-content')",
+                            category_grid: "@lang('admin::app.settings.themes.create.type.category-grid')",
                         }
                     };
                 },
 
                 methods: {
-                    create(params, { setErrors }) {
+                    create(params, {
+                        setErrors
+                    }) {
                         this.$axios.post('{{ route('admin.settings.themes.store') }}', params)
                             .then((response) => {
                                 if (response.data.redirect_url) {
                                     window.location.href = response.data.redirect_url;
-                                } 
+                                }
                             })
                             .catch((error) => {
                                 if (error.response.status == 422) {
@@ -220,5 +220,5 @@
             });
         </script>
     @endPushOnce
-    
+
 </x-admin::layouts>

@@ -80,10 +80,10 @@ trait CurrencyFormatter
             : $currency->code;
 
         return match ($currency->currency_position) {
-            CurrencyPositionEnum::LEFT->value             => $symbol.$formattedCurrency,
-            CurrencyPositionEnum::LEFT_WITH_SPACE->value  => $symbol.' '.$formattedCurrency,
-            CurrencyPositionEnum::RIGHT->value            => $formattedCurrency.$symbol,
-            CurrencyPositionEnum::RIGHT_WITH_SPACE->value => $formattedCurrency.' '.$symbol,
+            CurrencyPositionEnum::LEFT->value             => $symbol . $formattedCurrency,
+            CurrencyPositionEnum::LEFT_WITH_SPACE->value  => $symbol . ' ' . $formattedCurrency,
+            CurrencyPositionEnum::RIGHT->value            => $formattedCurrency . $symbol,
+            CurrencyPositionEnum::RIGHT_WITH_SPACE->value => $formattedCurrency . ' ' . $symbol,
         };
     }
 
@@ -96,7 +96,7 @@ trait CurrencyFormatter
     {
         $code = $currency instanceof \Webkul\Core\Contracts\Currency ? $currency->code : $currency;
 
-        $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
+        $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
 
         return $formatter->getSymbol(\NumberFormatter::CURRENCY_SYMBOL);
     }

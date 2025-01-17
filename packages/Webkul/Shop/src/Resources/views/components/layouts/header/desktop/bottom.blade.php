@@ -1,7 +1,6 @@
 {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.before') !!}
 
-<div
-    class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] max-1440:px-8 container">
+<div class="flex min-h-[78px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0  max-1440:px-8 ">
     <!--
         This section will provide categories for the first, second, and third levels. If
         additional levels are required, users can customize them according to their needs.
@@ -11,8 +10,7 @@
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.before') !!}
 
         <a href="{{ route('shop.home.index') }}" aria-label="@lang('shop::app.components.layouts.header.bagisto')">
-            <img src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}" width="131"
-                height="29" alt="{{ config('app.name') }}">
+            {{ config('app.name') }}
         </a>
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.after') !!}
@@ -188,7 +186,7 @@
 </div>
 
 <v-desktop-category>
-    <div class="flex items-center gap-5">
+    <div class="flex items-center gap-5 ">
         <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
 
         <span class="shimmer h-6 w-20 rounded" role="presentation"></span>
@@ -202,7 +200,7 @@
         id="v-desktop-category-template"
     >
         <div
-            class="flex items-center gap-5"
+            class="flex items-center gap-5 " 
             v-if="isLoading"
         >
             <span
@@ -222,7 +220,7 @@
         </div>
 
         <div
-            class="flex items-center"
+            class="flex items-center menu-desktop"
             v-else
         >
             <div

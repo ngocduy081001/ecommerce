@@ -264,6 +264,15 @@
                             <x-admin::form.control-group.control type="switch" class="cursor-pointer" name="status"
                                 value="1" :label="trans('admin::app.catalog.categories.create.visible-in-menu')" />
                         </x-admin::form.control-group>
+
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="font-medium text-gray-800 dark:text-white">
+                                @lang('admin::app.catalog.categories.create.visible-in-home-page')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control type="switch" class="cursor-pointer" name="home"
+                                value="1" :label="trans('admin::app.catalog.categories.create.visible-in-home-page')" />
+                        </x-admin::form.control-group>
                     </x-slot>
                 </x-admin::accordion>
 

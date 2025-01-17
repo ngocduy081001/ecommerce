@@ -1267,6 +1267,7 @@ return [
                 'slug'                     => 'Slug',
                 'title'                    => 'Add New Category',
                 'visible-in-menu'          => 'Visible In Menu',
+                'visible-in-home-page'     => 'Visible In Home Page',
             ],
 
             'edit' => [
@@ -1299,6 +1300,7 @@ return [
                 'slug'                     => 'Slug',
                 'title'                    => 'Edit Category',
                 'visible-in-menu'          => 'Visible In Menu',
+                'visible-in-home-page'     => 'Visible In Home Page',
             ],
 
             'category'             => 'Category',
@@ -3110,10 +3112,14 @@ return [
                     'services-content'  => 'Services Content',
                     'static-content'    => 'Static Content',
                     'title'             => 'Type',
+                    'category-grid'     => 'Category Grid',
                 ],
             ],
 
             'edit' => [
+                'style'                         => 'Style',
+                'category-grid-description'     => 'Display categories in a grid format.',
+                'category-grid'                 => 'Category Grid',
                 'active'                        => 'Active',
                 'add-filter-btn'                => 'Add Filter',
                 'add-footer-link-btn'           => 'Add Footer Link',

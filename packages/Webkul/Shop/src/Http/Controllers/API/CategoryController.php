@@ -42,6 +42,19 @@ class CategoryController extends APIController
         return CategoryResource::collection($categories);
     }
 
+    public function grid(): JsonResource
+    {
+        $defaultParams = [
+            'status' => 1,
+            'locale' => app()->getLocale(),
+            'home' => 1,
+        ];
+
+        $categories = $this->categoryRepository->getAll(array_merge($defaultParams, request()->all()));
+
+        return CategoryResource::collection($categories);
+    }
+
     /**
      * Get all categories in tree format.
      */
