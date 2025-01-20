@@ -11,7 +11,7 @@
         
                 </div>
                 <div class="attribute-size_content">
-                    <div class="item {{ $style }}" v-for="category in categories" >
+                    <a :href="category.slug"	 class="item {{ $style }}" v-for="category in categories" >
                         <div class="item_grid_img">
                             <x-shop::media.images.lazy
                             ::src="category.logo?.original_image_url || '{{ bagisto_asset('images/small-product-placeholder.webp') }}'"
@@ -23,23 +23,8 @@
                         <div class="item_grid_title"> <span>@{{ category.name }} <i class="fa-solid fa-arrow-right-long"></i></span>
         
                         </div>
-                    </div>
-                     <!--  <div class="item">
-                        <div class="item_image">
-                            <img src="https://cdn.sofacompany.com/media/contentmanager/content/246604_v2.png?width=450&height=450" alt="Sofa Small">
-                        </div>
-                        <div class="item_title"> <span>3-personers sofaer <i class="fa-solid fa-arrow-right-long"></i></span>
-        
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item_image">
-                            <img src="https://cdn.sofacompany.com/media/contentmanager/content/240002.png?width=450&height=450" alt="Sofa Small">
-                        </div>
-                        <div class="item_title"> <span>2personers sofaer <i class="fa-solid fa-arrow-right-long"></i></span>
-        
-                        </div>
-                    </div>  -->
+                    </a>
+                   
                 </div>
             </div>
         </div>
@@ -51,14 +36,13 @@
                 'title',
                 'src',
                 'style',
+                'carousel',
             ],
 
             data() {
                 return {
                     isLoading: true,
-
                     categories: [],
-
                     offset: 323,
                 };
             },
@@ -69,21 +53,22 @@
 
             methods: {
                 getCategories() {
-
                     console.log(this.style);
                     this.$axios.get(this.src)
                         .then(response => {
                             this.isLoading = false;
                             this.categories = response.data.data;
-
-
                         }).catch(error => {
                             console.log(error);
                         });
                 },
-
-
             },
+
+            computed: {
+                isCarousel() {
+                    return this.carousel === 'true';
+                }
+            }
         });
     </script>
 @endPushOnce

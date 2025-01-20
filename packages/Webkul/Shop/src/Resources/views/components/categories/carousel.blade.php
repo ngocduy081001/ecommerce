@@ -1,4 +1,5 @@
-<v-categories-carousel src="{{ $src }}" title="{{ $title }}" navigation-link="{{ $navigationLink ?? '' }}">
+<v-categories-carousel src="{{ $src }}" title="{{ $title }}" subtitle="{{ $subtitle }}"
+    navigation-link="{{ $navigationLink ?? '' }}">
     <x-shop::shimmer.categories.carousel :count="8" :navigation-link="$navigationLink ?? false" />
 </v-categories-carousel>
 
@@ -8,16 +9,24 @@
         id="v-categories-carousel-template"
     >
         <div 
-            class="container mt-14 max-lg:px-8 max-md:mt-7 max-md:!px-0 max-sm:mt-5"
+            class="section-attribute-size container-fluid"
             v-if="! isLoading && categories?.length"
         >
+            <div class="text-center">
+                <div class="category-carousel_title">
+                    <h2 class="text-center">@{{ title }}</h2>
+                </div>
+                <div class="category-carousel_subtitle">
+                    <span class="text-center">@{{ subtitle }}</span>
+                </div>
+            </div>
             <div class="relative">
                 <div
                     ref="swiperContainer"
-                    class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-lg:gap-4"
+                    class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-lg:gap-4 category-carousel"
                 >
                     <div
-                        class="grid min-w-[120px] category-carousel-item  grid-cols-1 justify-items-center gap-4 font-medium max-md:min-w-20 max-md:max-w-20 max-md:gap-2.5 max-md:first:ml-4 max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5"
+                        class="zoom-out grid min-w-[120px] category-carousel-item  grid-cols-1 justify-items-center gap-4 font-medium max-md:min-w-20 max-md:max-w-20 max-md:gap-2.5 max-md:first:ml-4 max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5"
                         v-for="category in categories"
                     >
                         <a
@@ -36,19 +45,21 @@
 
                         <a
                             :href="category.slug"
-                            class=""
+                            class="w-full flex items-center justify-start"
                         >
                             <p
-                                class="text-center text-lg text-black max-md:text-base max-md:font-normal max-sm:text-sm"
+                                class="text-left title-category"
                                 v-text="category.name"
                             >
+                            
                             </p>
+                            <i class="fa-solid fa-arrow-right-long"></i>
                         </a>
                     </div>
                 </div>
 
                 <span
-                    class="icon-arrow-left-stylish absolute -left-10 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-left-7 max-md:hidden"
+                    class="icon-arrow-left-stylish absolute -left-10 top-45 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-left-7 max-md:hidden"
                     role="button"
                     aria-label="@lang('shop::components.carousel.previous')"
                     tabindex="0"
@@ -57,7 +68,7 @@
                 </span>
 
                 <span
-                    class="icon-arrow-right-stylish absolute -right-6 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-right-7 max-md:hidden"
+                    class="icon-arrow-right-stylish absolute -right-6 top-45 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-right-7 max-md:hidden"
                     role="button"
                     aria-label="@lang('shop::components.carousel.next')"
                     tabindex="0"
@@ -83,6 +94,7 @@
             props: [
                 'src',
                 'title',
+                'subtitle',
                 'navigationLink',
             ],
 

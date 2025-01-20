@@ -10,7 +10,13 @@
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.before') !!}
 
         <a href="{{ route('shop.home.index') }}" aria-label="@lang('shop::app.components.layouts.header.bagisto')">
-            {{ config('app.name') }}
+            @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
+                <img class="site-logo " src="{{ Storage::url($logo) }}" alt="{{ config('app.name') }}" />
+            @else
+                <img src="{{ request()->cookie('dark_mode') ? bagisto_asset('images/dark-logo.svg') : bagisto_asset('images/logo.svg') }}"
+                    id="logo-image" alt="{{ config('app.name') }}" />
+            @endif
+
         </a>
 
         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.logo.after') !!}

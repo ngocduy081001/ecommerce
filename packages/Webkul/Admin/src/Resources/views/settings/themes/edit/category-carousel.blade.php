@@ -21,7 +21,47 @@
                         </p>
                     </div>
                 </div>
+                <!-- Title -->
+                <x-admin::form.control-group class="mb-2.5 pt-4">
+                    <x-admin::form.control-group.label class="required">
+                        @lang('admin::app.settings.themes.edit.filter-title')
+                    </x-admin::form.control-group.label>
 
+                    <v-field
+                        type="text"
+                        name="{{ $currentLocale->code }}[options][title]"
+                        value="{{ $theme->translate($currentLocale->code)->options['title'] ?? '' }}"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                        :class="[errors['{{ $currentLocale->code }}[options][title]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                        rules="required"
+                        label="@lang('admin::app.settings.themes.edit.filter-title')"
+                        placeholder="@lang('admin::app.settings.themes.edit.filter-title')"
+                    >
+                    </v-field>
+
+                    <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][title]" />
+                </x-admin::form.control-group>
+
+                <!-- Title -->
+                <x-admin::form.control-group class="mb-2.5 pt-4">
+                    <x-admin::form.control-group.label class="required">
+                        @lang('admin::app.settings.themes.edit.subtitle')
+                    </x-admin::form.control-group.label>
+
+                    <v-field
+                        type="text"
+                        name="{{ $currentLocale->code }}[options][subtitle]"
+                        value="{{ $theme->translate($currentLocale->code)->options['subtitle'] ?? '' }}"
+                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                        :class="[errors['{{ $currentLocale->code }}[options][subtitle]'] ? 'border border-red-600 hover:border-red-600' : '']"
+                        rules="required"
+                        label="@lang('admin::app.settings.themes.edit.filter-subtitle')"
+                        placeholder="@lang('admin::app.settings.themes.edit.subtitle')"
+                    >
+                    </v-field>
+
+                    <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[options][subtitle]" />
+                </x-admin::form.control-group>
                 <!-- Sort -->
                 <x-admin::form.control-group>
                     <x-admin::form.control-group.label class="required">
@@ -278,8 +318,7 @@
                     options: @json($theme->translate($currentLocale->code)['options'] ?? null),
 
                     filters: {
-                        available: [
-                            {
+                        available: [{
                                 id: 'parent_id',
                                 code: 'parent_id',
                                 name: '@lang('admin::app.settings.themes.edit.parent-id')',
@@ -296,8 +335,7 @@
                                 code: 'status',
                                 name: '@lang('admin::app.settings.themes.edit.status')',
                                 type: 'select',
-                                options: [
-                                    {
+                                options: [{
                                         id: '1',
                                         name: '@lang('admin::app.settings.themes.edit.active')',
                                     },
@@ -316,21 +354,23 @@
 
             created() {
                 if (this.options === null) {
-                    this.options = { filters: {} };
-                }   
+                    this.options = {
+                        filters: {}
+                    };
+                }
 
-                if (! this.options.filters) {
+                if (!this.options.filters) {
                     this.options.filters = {};
                 }
 
                 this.options.filters = Object.keys(this.options.filters)
-                    .filter(key => ! ['sort', 'limit', 'title'].includes(key))
+                    .filter(key => !['sort', 'limit', 'title'].includes(key))
                     .map(key => ({
                         key: key,
                         value: this.options.filters[key]
                     }));
             },
-            
+
             methods: {
                 addFilter(params) {
                     this.options.filters.push(params);
@@ -354,4 +394,4 @@
             },
         });
     </script>
-@endPushOnce    
+@endPushOnce

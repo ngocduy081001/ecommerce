@@ -12,7 +12,7 @@
 
     {!! view_render_event('bagisto.shop.layout.head.before') !!}
 
-    <title>{{ $title ?? '' }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 
     <meta charset="UTF-8">
 
@@ -45,13 +45,37 @@
     </style>
 
     {!! view_render_event('bagisto.shop.layout.head.after') !!}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/review.css') }}">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700&display=swap">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/theme.css') }}">
     <link rel="stylesheet" href="{{ asset('themes/shop/default/css/app.css?v=' . time()) }}">
+    <style>
+        #tp-widget-reviews {
+            padding: 0 40px !important;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+
+            $('.reviews-slider').slick({
+                infinite: false,
+                slidesToShow: 4,
+                slidesToScroll: 3,
+
+            });
+        });
+    </script>
 </head>
 
 <body>
+
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
     <a href="#main" class="skip-to-main-content-link">

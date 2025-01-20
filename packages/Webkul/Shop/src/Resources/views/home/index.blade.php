@@ -17,6 +17,8 @@
         {{ $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
 
+
+
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php $data = $customization->options @endphp
@@ -47,7 +49,7 @@
 
             @case ($customization::CATEGORY_CAROUSEL)
                 <!-- Categories carousel -->
-                <x-shop::categories.carousel :title="$data['title'] ?? ''" :src="route('shop.api.categories.index', $data['filters'] ?? [])" :navigation-link="route('shop.home.index')"
+                <x-shop::categories.carousel :title="$data['title'] ?? ''" :subtitle="$data['subtitle'] ?? ''" :src="route('shop.api.categories.index', $data['filters'] ?? [])" :navigation-link="route('shop.home.index')"
                     aria-label="Categories Carousel" />
             @break
 

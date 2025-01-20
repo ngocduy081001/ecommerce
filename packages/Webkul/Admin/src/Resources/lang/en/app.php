@@ -3180,6 +3180,8 @@ return [
                 'url'                           => 'URL',
                 'value'                         => 'Value: :value',
                 'value-input'                   => 'Value',
+                'subtitle'                      => 'Subtitle',
+                'subtitle-input'                => 'Subtitle',
 
                 'services-content' => [
                     'add-btn'            => 'Add Services',
