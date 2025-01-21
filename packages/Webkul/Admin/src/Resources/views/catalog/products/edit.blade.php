@@ -5,10 +5,7 @@
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.before', ['product' => $product]) !!}
 
-    <x-admin::form
-        method="PUT"
-        enctype="multipart/form-data"
-    >
+    <x-admin::form method="PUT" enctype="multipart/form-data">
         {!! view_render_event('bagisto.admin.catalog.product.edit.actions.before', ['product' => $product]) !!}
 
         <!-- Page Header -->
@@ -22,24 +19,15 @@
 
                 <div class="flex items-center gap-x-2.5">
                     <!-- Back Button -->
-                    <a
-                        href="{{ route('admin.catalog.products.index') }}"
-                        class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
-                    >
+                    <a href="{{ route('admin.catalog.products.index') }}"
+                        class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
                         @lang('admin::app.account.edit.back-btn')
                     </a>
 
                     <!-- Preview Button -->
-                    @if (
-                        $product->status
-                        && $product->visible_individually
-                        && $product->url_key
-                    )
-                        <a
-                            href="{{ route('shop.product_or_category.index', $product->url_key) }}"
-                            class="secondary-button"
-                            target="_blank"
-                        >
+                    @if ($product->status && $product->visible_individually && $product->url_key)
+                        <a href="{{ route('shop.product_or_category.index', $product->url_key) }}"
+                            class="secondary-button" target="_blank">
                             @lang('admin::app.catalog.products.edit.preview')
                         </a>
                     @endif
@@ -67,19 +55,13 @@
                 <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button
-                            type="button"
-                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-                        >
+                        <button type="button"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800">
                             <span class="icon-store text-2xl"></span>
-                            
+
                             {{ $currentChannel->name }}
 
-                            <input
-                                type="hidden"
-                                name="channel"
-                                value="{{ $currentChannel->code }}"
-                            />
+                            <input type="hidden" name="channel" value="{{ $currentChannel->code }}" />
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
@@ -88,10 +70,8 @@
                     <!-- Dropdown Content -->
                     <x-slot:content class="!p-0">
                         @foreach ($channels as $channel)
-                            <a
-                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
-                                class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
-                            >
+                            <a href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
+                                class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950">
                                 {{ $channel->name }}
                             </a>
                         @endforeach
@@ -102,19 +82,13 @@
                 <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
-                        <button
-                            type="button"
-                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-                        >
+                        <button type="button"
+                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800">
                             <span class="icon-language text-2xl"></span>
 
                             {{ $currentLocale->name }}
-                            
-                            <input
-                                type="hidden"
-                                name="locale"
-                                value="{{ $currentLocale->code }}"
-                            />
+
+                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}" />
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
@@ -123,10 +97,8 @@
                     <!-- Dropdown Content -->
                     <x-slot:content class="!p-0">
                         @foreach ($currentChannel->locales->sortBy('name') as $locale)
-                            <a
-                                href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
-                            >
+                            <a href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
+                                class="flex gap-2.5 px-5 py-2 text-base cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : '' }}">
                                 {{ $locale->name }}
                             </a>
                         @endforeach
@@ -142,16 +114,22 @@
 
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             @foreach ($product->attribute_family->attribute_groups->groupBy('column') as $column => $groups)
-                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', ['product' => $product]) !!}
+                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.before', [
+                    'product' => $product,
+                ]) !!}
 
-                <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
+                <div
+                    class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
+
                     @foreach ($groups as $group)
                         @php
                             $customAttributes = $product->getEditableAttributes($group);
                         @endphp
 
                         @if (count($customAttributes))
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.before', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.before', [
+                                'product' => $product,
+                            ]) !!}
 
                             <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
                                 <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
@@ -164,23 +142,24 @@
                                 @endif
 
                                 @foreach ($customAttributes as $attribute)
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', [
+                                        'product' => $product,
+                                    ]) !!}
 
                                     <x-admin::form.control-group class="last:!mb-0">
                                         <x-admin::form.control-group.label>
                                             {!! $attribute->admin_name . ($attribute->is_required ? '<span class="required"></span>' : '') !!}
 
-                                            @if (
-                                                $attribute->value_per_channel
-                                                && $channels->count() > 1
-                                            )
-                                                <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
+                                            @if ($attribute->value_per_channel && $channels->count() > 1)
+                                                <span
+                                                    class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
                                                     {{ $currentChannel->name }}
                                                 </span>
                                             @endif
 
                                             @if ($attribute->value_per_locale)
-                                                <span class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
+                                                <span
+                                                    class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600">
                                                     {{ $currentLocale->name }}
                                                 </span>
                                             @endif
@@ -188,24 +167,30 @@
 
                                         @include ('admin::catalog.products.edit.controls', [
                                             'attribute' => $attribute,
-                                            'product'   => $product,
+                                            'product' => $product,
                                         ])
-            
-                                        <x-admin::form.control-group.error :control-name="$attribute->code . (in_array($attribute->type, ['multiselect', 'checkbox']) ? '[]' : '')" />
+
+                                        <x-admin::form.control-group.error :control-name="$attribute->code .
+                                            (in_array($attribute->type, ['multiselect', 'checkbox']) ? '[]' : '')" />
                                     </x-admin::form.control-group>
 
-                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', ['product' => $product]) !!}
+                                    {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.controls.before', [
+                                        'product' => $product,
+                                    ]) !!}
                                 @endforeach
 
-                                @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
+                                @includeWhen(
+                                    $group->code == 'price',
+                                    'admin::catalog.products.edit.price.group')
 
                                 @includeWhen(
-                                    $group->code == 'inventories' && ! $product->getTypeInstance()->isComposite(),
-                                    'admin::catalog.products.edit.inventories'
-                                )
+                                    $group->code == 'inventories' && !$product->getTypeInstance()->isComposite(),
+                                    'admin::catalog.products.edit.inventories')
                             </div>
 
-                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.after', ['product' => $product]) !!}
+                            {!! view_render_event('bagisto.admin.catalog.product.edit.form.' . $group->code . '.after', [
+                                'product' => $product,
+                            ]) !!}
                         @endif
                     @endforeach
 
@@ -235,7 +220,9 @@
                     @endif
                 </div>
 
-                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.after', ['product' => $product]) !!}
+                {!! view_render_event('bagisto.admin.catalog.product.edit.form.column_' . $column . '.after', [
+                    'product' => $product,
+                ]) !!}
             @endforeach
         </div>
 

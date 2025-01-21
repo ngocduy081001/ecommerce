@@ -1,14 +1,9 @@
 <!-- SEO Meta Content -->
 @push('meta')
-    <meta 
-        name="description" 
-        content="{{ trim($category->meta_description) != "" ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}"
-    />
+    <meta name="description"
+        content="{{ trim($category->meta_description) != '' ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}" />
 
-    <meta 
-        name="keywords" 
-        content="{{ $category->meta_keywords }}"
-    />
+    <meta name="keywords" content="{{ $category->meta_keywords }}" />
 
     @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
         <script type="application/ld+json">
@@ -16,311 +11,218 @@
         </script>
     @endif
 @endPush
-
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/category.css?time=' . time()) }}">
+@endpush
 <x-shop::layouts>
-    <!-- Page Title -->
-    <x-slot:title>
-        {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
-    </x-slot>
-
-    {!! view_render_event('bagisto.shop.categories.view.banner_path.before') !!}
-
-    <!-- Hero Image -->
-    @if ($category->banner_path)
-        <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
-            <x-shop::media.images.lazy
-                class="aspect-[4/1] max-h-full max-w-full rounded-xl"
-                src="{{ $category->banner_url }}"
-                alt="{{ $category->name }}"
-                width="1320"
-                height="300"
-            />
+    <section aria-label="(Nuværende placering)" class="Breadcrumbs">
+        <div class="ContentWrapper ">
+            <nav aria-label="Breadcrumbs navigation">
+                <ul itemscope="" itemtype="http://schema.org/BreadcrumbList" class="Breadcrumbs-List">
+                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+                        class="Breadcrumb"><a tabindex="0" class=" Breadcrumb-Link" href="/da-dk">
+                            <meta itemprop="item" content="https://sofacompany.com/"><span itemprop="name">Hjem</span>
+                            <meta itemprop="position" content="1">
+                        </a></li>
+                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
+                        class="Breadcrumb">
+                        <div tabindex="-1">
+                            <meta itemprop="item" content="https://sofacompany.com/da-dk/laenestole"><span
+                                itemprop="name">Lænestole</span>
+                            <meta itemprop="position" content="2">
+                        </div>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    @endif
-
-    {!! view_render_event('bagisto.shop.categories.view.banner_path.after') !!}
-
-    {!! view_render_event('bagisto.shop.categories.view.description.before') !!}
-
-    @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
-        @if ($category->description)
-            <div class="container mt-[34px] px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4 max-md:text-sm max-sm:text-xs">
-                {!! $category->description !!}
-            </div>
-        @endif
-    @endif
-        
-    {!! view_render_event('bagisto.shop.categories.view.description.after') !!}
-
-    @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
-        <!-- Category Vue Component -->
-        <v-category>
-            <!-- Category Shimmer Effect -->
-            <x-shop::shimmer.categories.view />
-        </v-category>
-    @endif
-
-    @pushOnce('scripts')
-        <script 
-            type="text/x-template" 
-            id="v-category-template"
-        >
-            <div class="container px-[60px] max-lg:px-8 max-md:px-4">
-                <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
-                    <!-- Product Listing Filters -->
-                    @include('shop::categories.filters')
-
-                    <!-- Product Listing Container -->
-                    <div class="flex-1">
-                        <!-- Desktop Product Listing Toolbar -->
-                        <div class="max-md:hidden">
-                            @include('shop::categories.toolbar')
+    </section>
+    <main class="CategoryPage">
+        <section aria-label="Category page">
+            <div class="ContentWrapper CategoryPage-Wrapper">
+                <div class="CategoryPage-Product-Wrapper">
+                    <article class="CategoryDetails">
+                        <div class="CategoryDetails-Description CategoryDetails-Description_big">
+                            <h1 class="CategoryDetails-Heading CategoryDetails-Heading_big">Lænestole</h1>
+                            <div class="CategoryDetails-CountSort"><span>Produkter: 38</span></div>
                         </div>
-
-                        <!-- Product List Card Container -->
-                        <div
-                            class="mt-8 grid grid-cols-1 gap-6"
-                            v-if="filters.toolbar.mode === 'list'"
-                        >
-                            <!-- Product Card Shimmer Effect -->
-                            <template v-if="isLoading">
-                                <x-shop::shimmer.products.cards.list count="12" />
-                            </template>
-
-                            <!-- Product Card Listing -->
-                            {!! view_render_event('bagisto.shop.categories.view.list.product_card.before') !!}
-
-                            <template v-else>
-                                <template v-if="products.length">
-                                    <x-shop::products.card
-                                        ::mode="'list'"
-                                        v-for="product in products"
-                                    />
-                                </template>
-
-                                <!-- Empty Products Container -->
-                                <template v-else>
-                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
-                                        <img
-                                            class="max-md:h-[100px] max-md:w-[100px]"
-                                            src="{{ bagisto_asset('images/thank-you.png') }}"
-                                            alt="@lang('shop::app.categories.view.empty')"
-                                        />
-                                  
-                                        <p
-                                            class="text-xl max-md:text-sm"
-                                            role="heading"
-                                        >
-                                            @lang('shop::app.categories.view.empty')
-                                        </p>
+                    </article>
+                    <div class="CategoryFilterOverlay-FilterBar CategoryFilterOverlay-FilterBar_isPromotion">
+                        <div class="ProductConfigurableAttributes CategoryFilterOverlay-Attributes">
+                            <div class="ProductConfigurableAttributes-Filters">
+                                <div class="ProductConfigurableAttributes-Buttons">
+                                    <div
+                                        class="ProductConfigurableAttributes-Buttons-Scroll indiana-scroll-container indiana-scroll-container--hide-scrollbars">
+                                        <button class="ExpandableContent-Button">Kích thước</button>
+                                        <button class="ExpandableContent-Button">Giá</button>
+                                        <button class="ExpandableContent-Button">Màu sắc</button>
+                                        <button class="ExpandableContent-Button">Chỗ ngồi</button>
+                                        <button class="ExpandableContent-Button ExpandableContent-Button_sort">Sorter
+                                            efter
+                                            <svg width="9px" height="12px" viewBox="0 0 9 12"
+                                                style="transform: rotate(90deg);">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <g transform="translate(-345.000000, -442.000000)">
+                                                        <g fill="#000"
+                                                            transform="translate(349.000000, 448.000000) rotate(-90.000000) translate(-349.000000, -448.000000) translate(343.000000, 443.000000)"
+                                                            stroke="#000" stroke-width="1.6" class="svg-color">
+                                                            <polyline fill="none" points="1 2 6 8 11 2"></polyline>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </button>
                                     </div>
-                                </template>
-                            </template>
-
-                            {!! view_render_event('bagisto.shop.categories.view.list.product_card.after') !!}
-                        </div>
-
-                        <!-- Product Grid Card Container -->
-                        <div v-else class="mt-8 max-md:mt-5">
-                            <!-- Product Card Shimmer Effect -->
-                            <template v-if="isLoading">
-                                <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
-                                    <x-shop::shimmer.products.cards.grid count="12" />
                                 </div>
-                            </template>
-
-                            {!! view_render_event('bagisto.shop.categories.view.grid.product_card.before') !!}
-
-                            <!-- Product Card Listing -->
-                            <template v-else>
-                                <template v-if="products.length">
-                                    <div class="grid grid-cols-3 gap-8 max-1060:grid-cols-2 max-md:justify-items-center max-md:gap-x-4">
-                                        <x-shop::products.card
-                                            ::mode="'grid'"
-                                            v-for="product in products"
-                                        />
+                                <div class="ProductConfigurableAttributes-DropDownList" style="display: none;">
+                                    <div class="ProductConfigurableAttributes-Option">
+                                        <div class="ProductConfigurableAttributes-Header">
+                                            <p>Giá</p><button aria-label="Close Filter"
+                                                class="ProductConfigurableAttributes-Option-Close"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <g id="Group_416" data-name="Group 416"
+                                                        transform="translate(-325 -718)">
+                                                        <g id="Ellipse_366" data-name="Ellipse 366"
+                                                            transform="translate(325 718)" fill="#fff" stroke="#000"
+                                                            stroke-width="1">
+                                                            <circle cx="12" cy="12" r="12" stroke="none">
+                                                            </circle>
+                                                            <circle cx="12" cy="12" r="11.5"
+                                                                fill="none"></circle>
+                                                        </g>
+                                                        <line id="Line_35" data-name="Line 35" x1="10"
+                                                            y2="10" transform="translate(332 725)" fill="none"
+                                                            stroke="#000" stroke-width="1"></line>
+                                                        <line id="Line_375" data-name="Line 375" x2="10"
+                                                            y2="10" transform="translate(332 725)"
+                                                            fill="none" stroke="#000" stroke-width="1"></line>
+                                                    </g>
+                                                </svg></button>
+                                        </div>
+                                        <x-shop::range-slider ::key="refreshKey" default-type="price" ::default-allowed-max-range="allowedMaxPrice"
+                                            ::default-min-range="minRange" ::default-max-range="maxRange"
+                                            @change-range="setPriceRange($event)" />
+                                        <div class="ProductConfigurableAttributes-Actions"><button
+                                                class="ProductConfigurableAttributes-Results Button">
+                                                <div>Có 38 sản phẩm</div>
+                                            </button>
+                                            <div
+                                                class="ProductConfigurableAttributes-Reset ProductConfigurableAttributes-Reset">
+                                                Làm mới</div>
+                                        </div>
                                     </div>
-                                </template>
-
-                                <!-- Empty Products Container -->
-                                <template v-else>
-                                    <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
-                                        <img
-                                            class="max-md:h-[100px] max-md:w-[100px]"
-                                            src="{{ bagisto_asset('images/thank-you.png') }}"
-                                            alt="@lang('shop::app.categories.view.empty')"
-                                        />
-                                        
-                                        <p
-                                            class="text-xl max-md:text-sm"
-                                            role="heading"
-                                        >
-                                            @lang('shop::app.categories.view.empty')
-                                        </p>
-                                    </div>
-                                </template>
-                            </template>
-
-                            {!! view_render_event('bagisto.shop.categories.view.grid.product_card.after') !!}
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="CategoryPage-ProductListWrapper">
+                        <div
+                            class="ProductList CategoryProductList CategoryProductList_layout_grid CategoryProductList_smallGrid">
+                            <div class="ProductListPage-Page-Wrapper">
+                                <ul
+                                    class="ProductListPage CategoryProductList-Page CategoryProductList-Page_layout_grid CategoryProductList-Page_smallGrid">
+                                    @foreach ($products as $product)
+                                        <li class="ProductCard ">
+                                            <div class="ProductCard-Box"><a class=" ProductCard-Link"
+                                                    href="{{ route('shop.product_or_category.index', $product->url_key) }}">
+                                                    <figure class="ProductCard-Figure">
+                                                        <div class="ProductCard-PictureHoverWrapper">
+                                                            <div class="ProductCard-PictureHover">
+                                                                <div
+                                                                    class="Image Image_ratio_custom Image_imageStatus_1 Image_hasSrc ProductCard-Picture">
+                                                                    <img src="{{ $product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
+                                                                        alt="Babette" loading="lazy"
+                                                                        decoding="async" class="Image-Image"
+                                                                        style="width: 100%; height: 100%;">
+                                                                </div>
+                                                            </div>
+                                                            <div class="ProductCard-PictureHover">
+                                                                <div
+                                                                    class="Image Image_ratio_custom Image_imageStatus_1 Image_hasSrc ProductCard-Picture">
+                                                                    <img src="{{ $product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
+                                                                        alt="Babette" loading="lazy"
+                                                                        decoding="async" class="Image-Image"
+                                                                        style="width: 100%; height: 100%;">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="ProductCard-ConfigurableOptions ProductCard-ConfigurableOptions_hasRest">
+                                                            <div
+                                                                class="ProductCard-ColorDiv ProductCard-ColorDiv_active">
+                                                                <img loading="lazy" alt="Fabric color" width="18"
+                                                                    height="18"
+                                                                    src="https://cdn.sofacompany.com/media/imagemapperUploader/images/240_Maya-Cream.jpg?width=18&amp;height=18"
+                                                                    class="ProductCard-Color">
+                                                            </div>
+                                                            <div class="ProductCard-ColorDiv"><img loading="lazy"
+                                                                    alt="Fabric color" width="18" height="18"
+                                                                    src="https://cdn.sofacompany.com/media/imagemapperUploader/images/250_Moss-Rust.jpg?width=18&amp;height=18"
+                                                                    class="ProductCard-Color"></div>
+                                                            <div class="ProductCard-ColorDiv"><img loading="lazy"
+                                                                    alt="Fabric color" width="18" height="18"
+                                                                    src="https://cdn.sofacompany.com/media/imagemapperUploader/images/261_Danny-Cream.jpg?width=18&amp;height=18"
+                                                                    class="ProductCard-Color"></div>
+                                                            <div
+                                                                class="ProductCard-ColorDiv ProductCard-ColorDiv_rest">
+                                                                +
+                                                            </div>
+                                                        </div>
+                                                    </figure>
+                                                    <div class="ProductCard-ContentWrapper">
+                                                        <div class="ProductCard-Content">
+                                                            <div class="ProductCard-MainDetails">
+                                                                <div class="ProductCard-NameWrapper">
+                                                                    <p class="ProductCard-Name">Babette</p>
+                                                                    <p class="ProductCard-Name2">Lænestol</p>
+                                                                    <p class="ProductCard-Name3">Maya Cream</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ProductCard-PriceWrapper">
+                                                            <p aria-label="Product price: 4.999&nbsp;DKK"
+                                                                class="ProductPrice ProductCard-Price">
+                                                            <div class="ProductPrice-OuterWrapper">
+                                                                <div class="ProductPrice-InnerWrapper"><del
+                                                                        aria-label="Gammel pris"
+                                                                        class="ProductPrice-HighPrice">DKK 4.999</del>
+                                                                </div><span
+                                                                    class="ProductPrice-InnerWrapper ProductPrice-InnerWrapper_isVisible"><span>DKK
+                                                                        4.999</span></span>
+                                                            </div>
+                                                            </p>
+                                                            <div class="ProductCard-DeliveryPrice"><a class=" "
+                                                                    href="/da-dk/levering-og-afhentning">+
+                                                                    fragtpris</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a><button
+                                                    class="AddToCart AddToCart_white ProductCard-AddToCart Button Button_white"><span>Læg
+                                                        i kurv</span><span>Tilføjer ...</span></button></div>
+                                        </li>
+                                    @endforeach
 
-                        {!! view_render_event('bagisto.shop.categories.view.load_more_button.before') !!}
-
-                        <!-- Load More Button -->
-                        <button
-                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-11 py-3 text-center text-base max-md:rounded-lg max-sm:mt-6 max-sm:px-6 max-sm:py-1.5 max-sm:text-sm"
-                            @click="loadMoreProducts"
-                            v-if="links.next && ! loader"
-                        >
-                            @lang('shop::app.categories.view.load-more')
-                        </button>
-
-                        <button
-                            v-else-if="links.next"
-                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-[74.5px] py-3.5 text-center text-base max-md:rounded-lg max-md:py-3 max-sm:mt-6 max-sm:px-[50.8px] max-sm:py-1.5"
-                        >
-                            <!-- Spinner -->
-                            <img
-                                class="h-5 w-5 animate-spin text-navyBlue"
-                                src="{{ bagisto_asset('images/spinner.svg') }}"
-                                alt="Loading"
-                            />
-                        </button>
-
-                        {!! view_render_event('bagisto.shop.categories.view.grid.load_more_button.after') !!}
+                                </ul>
+                            </div>
+                            <p class="CategoryPage-ItemsCount">Viser 38 af 38 produkter</p>
+                            <nav class="ProductList-PageNavList">
+                                <ul class="PaginationLinks PaginationLinks-Hidden">
+                                    <li class="focus-visible"><a href="?page=1" target="_self"
+                                            class="focus-visible">1</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="CategoryPage-CMS CAT - Armchair - Bottom content">
+                    <div class="RenderWhenVisible">
+                        <div>
+                            <div class="RenderWhenVisible-Detector"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </script>
-
-        <script type="module">
-            app.component('v-category', {
-                template: '#v-category-template',
-
-                data() {
-                    return {
-                        isMobile: window.innerWidth <= 767,
-
-                        isLoading: true,
-
-                        isDrawerActive: {
-                            toolbar: false,
-                            
-                            filter: false,
-                        },
-
-                        filters: {
-                            toolbar: {},
-                            
-                            filter: {},
-                        },
-
-                        products: [],
-
-                        links: {},
-
-                        loader: false,
-                    }
-                },
-
-                computed: {
-                    queryParams() {
-                        let queryParams = Object.assign({}, this.filters.filter, this.filters.toolbar);
-
-                        return this.removeJsonEmptyValues(queryParams);
-                    },
-
-                    queryString() {
-                        return this.jsonToQueryString(this.queryParams);
-                    },
-                },
-
-                watch: {
-                    queryParams() {
-                        this.getProducts();
-                    },
-
-                    queryString() {
-                        window.history.pushState({}, '', '?' + this.queryString);
-                    },
-                },
-
-                methods: {
-                    setFilters(type, filters) {
-                        this.filters[type] = filters;
-                    },
-
-                    clearFilters(type, filters) {
-                        this.filters[type] = {};
-                    },
-
-                    getProducts() {
-                        this.isDrawerActive = {
-                            toolbar: false,
-                            
-                            filter: false,
-                        };
-
-                        document.body.style.overflow ='scroll';
-
-                        this.$axios.get("{{ route('shop.api.products.index', ['category_id' => $category->id]) }}", {
-                            params: this.queryParams 
-                        })
-                            .then(response => {
-                                this.isLoading = false;
-
-                                this.products = response.data.data;
-
-                                this.links = response.data.links;
-                            }).catch(error => {
-                                console.log(error);
-                            });
-                    },
-
-                    loadMoreProducts() {
-                        if (! this.links.next) {
-                            return;
-                        }
-
-                        this.loader = true;
-
-                        this.$axios.get(this.links.next)
-                            .then(response => {
-                                this.loader = false;
-
-                                this.products = [...this.products, ...response.data.data];
-
-                                this.links = response.data.links;
-                            }).catch(error => {
-                                console.log(error);
-                            });
-                    },
-
-                    removeJsonEmptyValues(params) {
-                        Object.keys(params).forEach(function (key) {
-                            if ((! params[key] && params[key] !== undefined)) {
-                                delete params[key];
-                            }
-
-                            if (Array.isArray(params[key])) {
-                                params[key] = params[key].join(',');
-                            }
-                        });
-
-                        return params;
-                    },
-
-                    jsonToQueryString(params) {
-                        let parameters = new URLSearchParams();
-
-                        for (const key in params) {
-                            parameters.append(key, params[key]);
-                        }
-
-                        return parameters.toString();
-                    }
-                },
-            });
-        </script>
-    @endPushOnce
+        </section>
+    </main>
 </x-shop::layouts>

@@ -6,12 +6,9 @@
         id="v-range-slider-template"
     >
         <div>
-            <div class="flex items-center gap-4">
-                <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.components.range-slider.range')
-                </p>
-
-                <p class="text-base font-semibold max-sm:text-sm">
+            <div class="flex items-center gap-4 align-items-center">
+                <p class="text-base font-semibold max-sm:text-sm  m-0">Giá:</p>
+                <p class="text-base  max-sm:text-sm  m-0">
                     @{{ rangeText }}
                 </p>
             </div>
@@ -88,7 +85,10 @@
 
             computed: {
                 rangeText() {
-                    let { formattedMinRange, formattedMaxRange } = this.getFormattedData();
+                    let {
+                        formattedMinRange,
+                        formattedMaxRange
+                    } = this.getFormattedData();
 
                     return `${formattedMinRange} - ${formattedMaxRange}`;
                 },
@@ -112,30 +112,30 @@
                     /**
                      * If someone is passing invalid props, this case will check first if they are valid, then continue.
                      */
-                     if (this.isTypeSupported()) {
+                    if (this.isTypeSupported()) {
                         switch (this.defaultType) {
                             case 'price':
                                 return {
                                     formattedAllowedMinRange: this.$shop.formatPrice(this.allowedMinRange),
-                                    formattedAllowedMaxRange: this.$shop.formatPrice(this.allowedMaxRange),
-                                    formattedMinRange: this.$shop.formatPrice(this.minRange),
-                                    formattedMaxRange: this.$shop.formatPrice(this.maxRange),
+                                        formattedAllowedMaxRange: this.$shop.formatPrice(this.allowedMaxRange),
+                                        formattedMinRange: this.$shop.formatPrice(this.minRange),
+                                        formattedMaxRange: this.$shop.formatPrice(this.maxRange),
                                 };
 
                             case 'float':
                                 return {
                                     formattedAllowedMinRange: parseFloat(this.allowedMinRange).toFixed(2),
-                                    formattedAllowedMaxRange: parseFloat(this.allowedMaxRange).toFixed(2),
-                                    formattedMinRange: parseFloat(this.minRange).toFixed(2),
-                                    formattedMaxRange: parseFloat(this.maxRange).toFixed(2),
+                                        formattedAllowedMaxRange: parseFloat(this.allowedMaxRange).toFixed(2),
+                                        formattedMinRange: parseFloat(this.minRange).toFixed(2),
+                                        formattedMaxRange: parseFloat(this.maxRange).toFixed(2),
                                 };
 
                             default:
                                 return {
                                     formattedAllowedMinRange: this.allowedMinRange,
-                                    formattedAllowedMaxRange: this.allowedMaxRange,
-                                    formattedMinRange: this.minRange,
-                                    formattedMaxRange: this.maxRange,
+                                        formattedAllowedMaxRange: this.allowedMaxRange,
+                                        formattedMinRange: this.minRange,
+                                        formattedMaxRange: this.maxRange,
                                 };
                         }
                     }
@@ -172,7 +172,8 @@
 
                     this.$refs.progress.style[direction] = (this.minRange / this.allowedMaxRange) * 100 + '%';
 
-                    this.$refs.progress.style[direction == 'left' ? 'right' : 'left'] = 100 - (this.maxRange / this.allowedMaxRange) * 100 + '%';
+                    this.$refs.progress.style[direction == 'left' ? 'right' : 'left'] = 100 - (this.maxRange / this
+                        .allowedMaxRange) * 100 + '%';
                 },
 
                 change() {

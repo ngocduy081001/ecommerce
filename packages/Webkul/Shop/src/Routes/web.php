@@ -19,3 +19,8 @@ require 'customer-routes.php';
  * cart, coupons, etc will be placed here.
  */
 require 'checkout-routes.php';
+
+
+Route::get('/demo', function () {
+    return view('shop::home.demo');
+});
