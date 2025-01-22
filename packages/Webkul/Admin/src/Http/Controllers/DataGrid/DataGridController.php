@@ -35,9 +35,10 @@ class DataGridController extends Controller
         /**
          * Fetching on the basis of column options.
          */
+
         return app($column->options['params']['repository'])
-            ->select([$column->options['params']['column']['label'].' as label', $column->options['params']['column']['value'].' as value'])
-            ->where($column->options['params']['column']['label'], 'LIKE', '%'.$params['search'].'%')
+            ->select([$column->options['params']['column']['label'] . ' as label', $column->options['params']['column']['value'] . ' as value'])
+            ->where($column->options['params']['column']['label'], 'LIKE', '%' . $params['search'] . '%')
             ->get();
     }
 }

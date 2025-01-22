@@ -1,4 +1,5 @@
 <!-- SEO Meta Content -->
+@inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 @push('meta')
     <meta name="description"
         content="{{ trim($category->meta_description) != '' ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 120, '') }}" />
@@ -122,6 +123,8 @@
                                 <ul
                                     class="ProductListPage CategoryProductList-Page CategoryProductList-Page_layout_grid CategoryProductList-Page_smallGrid">
                                     @foreach ($products as $product)
+                                        @dd($product)
+                                        @dd($product->attribute_values->toArray())
                                         <li class="ProductCard ">
                                             <div class="ProductCard-Box"><a class=" ProductCard-Link"
                                                     href="{{ route('shop.product_or_category.index', $product->url_key) }}">
@@ -173,7 +176,8 @@
                                                         <div class="ProductCard-Content">
                                                             <div class="ProductCard-MainDetails">
                                                                 <div class="ProductCard-NameWrapper">
-                                                                    <p class="ProductCard-Name">Babette</p>
+                                                                    <p class="ProductCard-Name">{{ $product->name }}
+                                                                    </p>
                                                                     <p class="ProductCard-Name2">Lænestol</p>
                                                                     <p class="ProductCard-Name3">Maya Cream</p>
                                                                 </div>

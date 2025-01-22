@@ -49,7 +49,7 @@ class ProductsCategoriesProxyController extends Controller
             return view('shop::products.view', compact('product'));
         }
 
-        $products = $this->productRepository->getAll(['category_id' => $category->id]);
+        $products = $this->productRepository->getAll(['category_id' => $category->id, 'not_null' => true]);
 
         return view('shop::categories.view', compact('products', 'category'));
     }

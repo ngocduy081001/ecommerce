@@ -332,7 +332,7 @@ class ProductController extends Controller
             $searchEngine = 'elastic';
 
             $indexNames = core()->getAllChannels()->map(function ($channel) {
-                return 'products_'.$channel->code.'_'.app()->getLocale().'_index';
+                return 'products_' . $channel->code . '_' . app()->getLocale() . '_index';
             })->toArray();
         }
 

@@ -253,6 +253,10 @@ class ProductRepository extends Repository
                         ->where('product_price_indices.customer_group_id', $customerGroup->id);
                 });
 
+            if (! empty($params['not_null'])) {
+                $qb->where('products.parent_id', '>', 0);
+            }
+
             if (! empty($params['category_id'])) {
 
                 $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
