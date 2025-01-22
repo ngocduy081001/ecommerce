@@ -180,38 +180,41 @@
                                                             </div>
                                                         </div>
                                                         <div class="ProductCard-PriceWrapper">
-                                                            <p aria-label="Product price: 4.999&nbsp;DKK"
+                                                            <p aria-label="Giá sản phẩm"
                                                                 class="ProductPrice ProductCard-Price">
                                                             <div class="ProductPrice-OuterWrapper">
                                                                 <div class="ProductPrice-InnerWrapper"><del
-                                                                        aria-label="Gammel pris"
-                                                                        class="ProductPrice-HighPrice">DKK 4.999</del>
+                                                                        aria-label=""
+                                                                        class="ProductPrice-HighPrice">{!! $product->getTypeInstance()->getPriceHtml() !!}</del>
                                                                 </div><span
-                                                                    class="ProductPrice-InnerWrapper ProductPrice-InnerWrapper_isVisible"><span>DKK
-                                                                        4.999</span></span>
+                                                                    class="ProductPrice-InnerWrapper ProductPrice-InnerWrapper_isVisible"><span>{!! $product->getTypeInstance()->getPriceHtml() !!}</span></span>
                                                             </div>
                                                             </p>
-                                                            <div class="ProductCard-DeliveryPrice"><a class=" "
-                                                                    href="/da-dk/levering-og-afhentning">+
+                                                            <div class="ProductCard-DeliveryPrice">
+                                                                <a class=" "
+                                                                    href="{{ route('shop.product_or_category.index', ['fallbackPlaceholder' => $product->url_key]) }}">+
                                                                     fragtpris</a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </a><button
-                                                    class="AddToCart AddToCart_white ProductCard-AddToCart Button Button_white"><span>Læg
-                                                        i kurv</span><span>Tilføjer ...</span></button></div>
+                                                </a>
+                                                <button
+                                                    class="AddToCart AddToCart_white ProductCard-AddToCart Button Button_white">
+                                                    <span>Xem chi tiết</span><span>Xem chi tiết</span>
+                                                </button>
+                                            </div>
                                         </li>
                                     @endforeach
 
                                 </ul>
                             </div>
-                            <p class="CategoryPage-ItemsCount">Viser 38 af 38 produkter</p>
+                            {{-- <p class="CategoryPage-ItemsCount">Viser 38 af 38 produkter</p>
                             <nav class="ProductList-PageNavList">
                                 <ul class="PaginationLinks PaginationLinks-Hidden">
                                     <li class="focus-visible"><a href="?page=1" target="_self"
                                             class="focus-visible">1</a></li>
                                 </ul>
-                            </nav>
+                            </nav> --}}
                         </div>
                     </div>
                 </div>

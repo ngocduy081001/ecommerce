@@ -38,8 +38,6 @@ class ProductsCategoriesProxyController extends Controller
     {
         $slugOrURLKey = urldecode(trim($request->getPathInfo(), '/'));
 
-
-
         $category = $this->categoryRepository->findBySlug($slugOrURLKey);
 
         if (!$category) {
@@ -47,6 +45,7 @@ class ProductsCategoriesProxyController extends Controller
             if (!$product) {
                 return abort(404);
             }
+
             return view('shop::products.view', compact('product'));
         }
 

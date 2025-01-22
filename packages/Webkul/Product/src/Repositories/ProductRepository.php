@@ -51,7 +51,7 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
-        $typeInstance = app(config('product_types.'.$data['type'].'.class'));
+        $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
 
         $product = $typeInstance->create($data);
 
@@ -192,7 +192,8 @@ class ProductRepository extends Repository
 
         if (! $product) {
             throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
+                get_class($this->model),
+                $slug
             );
         }
 
@@ -244,7 +245,7 @@ class ProductRepository extends Repository
 
             $qb = $query->distinct()
                 ->select('products.*')
-                ->leftJoin('products as variants', DB::raw('COALESCE('.$prefix.'variants.parent_id, '.$prefix.'variants.id)'), '=', 'products.id')
+                ->leftJoin('products as variants', DB::raw('COALESCE(' . $prefix . 'variants.parent_id, ' . $prefix . 'variants.id)'), '=', 'products.id')
                 ->leftJoin('product_price_indices', function ($join) {
                     $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -253,6 +254,7 @@ class ProductRepository extends Repository
                 });
 
             if (! empty($params['category_id'])) {
+
                 $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
                     ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
             }
@@ -297,31 +299,31 @@ class ProductRepository extends Repository
              * Filter collection by required attributes.
              */
             foreach ($attributes as $attribute) {
-                $alias = $attribute->code.'_product_attribute_values';
+                $alias = $attribute->code . '_product_attribute_values';
 
-                $qb->leftJoin('product_attribute_values as '.$alias, 'products.id', '=', $alias.'.product_id')
-                    ->where($alias.'.attribute_id', $attribute->id);
+                $qb->leftJoin('product_attribute_values as ' . $alias, 'products.id', '=', $alias . '.product_id')
+                    ->where($alias . '.attribute_id', $attribute->id);
 
                 if ($attribute->code == 'name') {
                     $synonyms = $this->searchSynonymRepository->getSynonymsByQuery(urldecode($params['name']));
 
                     $qb->where(function ($subQuery) use ($alias, $synonyms) {
                         foreach ($synonyms as $synonym) {
-                            $subQuery->orWhere($alias.'.text_value', 'like', '%'.$synonym.'%');
+                            $subQuery->orWhere($alias . '.text_value', 'like', '%' . $synonym . '%');
                         }
                     });
                 } elseif ($attribute->code == 'url_key') {
                     if (empty($params['url_key'])) {
-                        $qb->whereNotNull($alias.'.text_value');
+                        $qb->whereNotNull($alias . '.text_value');
                     } else {
-                        $qb->where($alias.'.text_value', 'like', '%'.urldecode($params['url_key']).'%');
+                        $qb->where($alias . '.text_value', 'like', '%' . urldecode($params['url_key']) . '%');
                     }
                 } else {
                     if (is_null($params[$attribute->code])) {
                         continue;
                     }
 
-                    $qb->where($alias.'.'.$attribute->column_name, 1);
+                    $qb->where($alias . '.' . $attribute->column_name, 1);
                 }
             }
 
@@ -349,15 +351,15 @@ class ProductRepository extends Repository
                     foreach ($aliases as $table => $tableAlias) {
                         $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $table, $tableAlias) {
                             foreach ($attributes as $attribute) {
-                                $alias = $attribute->code.'_'.$tableAlias;
+                                $alias = $attribute->code . '_' . $tableAlias;
 
-                                $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($table, $alias, $attribute) {
-                                    $join->on($table.'.id', '=', $alias.'.product_id');
+                                $qb->leftJoin('product_attribute_values as ' . $alias, function ($join) use ($table, $alias, $attribute) {
+                                    $join->on($table . '.id', '=', $alias . '.product_id');
 
-                                    $join->where($alias.'.attribute_id', $attribute->id);
+                                    $join->where($alias . '.attribute_id', $attribute->id);
                                 });
 
-                                $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
+                                $subFilterQuery->whereIn($alias . '.' . $attribute->column_name, explode(',', $params[$attribute->code]));
                             }
                         });
                     }
@@ -380,24 +382,24 @@ class ProductRepository extends Repository
                     } else {
                         $alias = 'sort_product_attribute_values';
 
-                        $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $attribute) {
-                            $join->on('products.id', '=', $alias.'.product_id')
-                                ->where($alias.'.attribute_id', $attribute->id);
+                        $qb->leftJoin('product_attribute_values as ' . $alias, function ($join) use ($alias, $attribute) {
+                            $join->on('products.id', '=', $alias . '.product_id')
+                                ->where($alias . '.attribute_id', $attribute->id);
 
                             if ($attribute->value_per_channel) {
                                 if ($attribute->value_per_locale) {
-                                    $join->where($alias.'.channel', core()->getRequestedChannelCode())
-                                        ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                    $join->where($alias . '.channel', core()->getRequestedChannelCode())
+                                        ->where($alias . '.locale', core()->getRequestedLocaleCode());
                                 } else {
-                                    $join->where($alias.'.channel', core()->getRequestedChannelCode());
+                                    $join->where($alias . '.channel', core()->getRequestedChannelCode());
                                 }
                             } else {
                                 if ($attribute->value_per_locale) {
-                                    $join->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                    $join->where($alias . '.locale', core()->getRequestedLocaleCode());
                                 }
                             }
                         })
-                            ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
+                            ->orderBy($alias . '.' . $attribute->column_name, $sortOptions['order']);
                     }
                 } else {
                     /* `created_at` is not an attribute so it will be in else case */
@@ -453,7 +455,7 @@ class ProductRepository extends Repository
                 ->whereIn('products.id', $indices['ids']);
 
             //Sort collection
-            $qb->orderBy(DB::raw('FIELD(id, '.implode(',', $indices['ids']).')'));
+            $qb->orderBy(DB::raw('FIELD(id, ' . implode(',', $indices['ids']) . ')'));
 
             return $qb;
         });
