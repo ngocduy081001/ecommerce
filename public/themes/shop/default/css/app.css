@@ -269,3 +269,198 @@ header {
 .Newsletter p+p {
     margin-top: 15px;
 }
+
+.ProductPrice-InnerWrapper span {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.ProductCard-DeliveryPrice .ProductCard-Link {
+    display: none;
+}
+
+.ProductCard-DeliveryPrice a {
+    text-underline-offset: 5px !important;
+    -webkit-text-decoration-color: #bebcba !important;
+    text-decoration-color: #bebcba !important;
+    text-decoration: underline !important;
+}
+
+.ProductPrice-InnerWrapper_isVisible .line-through {
+    font-size: 12px !important;
+}
+
+
+:root {
+    --primary-error-color: #ff0000;
+    --primary-success-color: #008000;
+    --field-note: #000000;
+    --input-border-color: #000000;
+    --checkmark-color: #000000;
+    --box-color: #ffffff;
+}
+
+.Field {
+    margin-top: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .Field {
+        margin-top: 1.4rem;
+    }
+}
+
+.Field-Label {
+    font-weight: 700;
+    padding-bottom: 0.36rem;
+}
+
+@media (max-width: 768px) {
+    .Field-Label {
+        padding-bottom: 0.42rem;
+    }
+}
+
+.Field-Message {
+    margin-bottom: -0.1em;
+    font-size: 1.26rem;
+    font-weight: 600;
+    color: var(--primary-error-color);
+}
+
+@media (max-width: 768px) {
+    .Field-Message {
+        font-size: 1.47rem;
+    }
+}
+
+.Field-Note {
+    margin-bottom: 0.24rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--field-note);
+    opacity: 0;
+    height: 0;
+    transition: height 0.1s ease-in, opacity 0.1s linear;
+    will-change: height, opacity;
+}
+
+@media (max-width: 768px) {
+    .Field-Note {
+        margin-bottom: 0.28rem;
+        font-size: 1.4rem;
+    }
+}
+
+.Field-Note::before {
+    content: '* ';
+}
+
+.Field_isValid input,
+.Field_isValid textarea {
+    border: 1px solid var(--primary-success-color);
+}
+
+.Field_hasError input,
+.Field_hasError textarea {
+    border: 1px solid var(--primary-error-color);
+}
+
+.Field::placeholder {
+    color: var(--field-note);
+    font-size: 1.08rem;
+}
+
+@media (max-width: 768px) {
+    .Field::placeholder {
+        font-size: 1.26rem;
+    }
+}
+
+.Field input:focus+.Field-Note {
+    opacity: 1;
+    height: 100%;
+}
+
+/* Inline styling */
+.Field_style_inline {
+    display: flex;
+    margin: 0;
+}
+
+.Field_style_inline button {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: solid 1px #000;
+}
+
+@media (min-width: 769px) {
+    .Field_style_inline button {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.Field_style_inline input {
+    height: 20px;
+    min-height: 20px;
+    width: 35px;
+    min-width: 35px;
+    border: none;
+    padding: 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .Field_style_inline input {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .Field_style_inline input {
+        height: 28px;
+        min-height: 28px;
+        width: 35px;
+        min-width: 35px;
+    }
+}
+
+.Field input[type='checkbox'],
+.Field input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    padding: 0;
+    min-width: 0;
+    min-height: 0;
+}
+
+.Field input[type='checkbox']+.input-control {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: var(--box-color);
+    border: 1px solid var(--input-border-color);
+    transition: background-color 0.25s ease-in, border-color 0.25s ease-in;
+    will-change: background-color, border-color;
+}
+
+.Field input[type='checkbox']+.input-control::after {
+    content: '';
+    position: absolute;
+    background: var(--checkmark-color);
+    transition: background-color 0.25s ease-in;
+}
+
+@media (max-width: 768px) {
+    .Field input[type='checkbox']+.input-control {
+        width: 2.1rem;
+        height: 2.1rem;
+    }
+}

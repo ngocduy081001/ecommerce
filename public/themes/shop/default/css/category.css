@@ -386,6 +386,7 @@ h1 {
 
 @media (min-width: calc(50.6875rem)) {
     .CategoryFilterOverlay-Attributes .ProductConfigurableAttributes-DropDownList {
+        right: 0;
         position: absolute;
         width: 400px;
         top: 40px;

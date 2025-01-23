@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Shetabit\Visitor\Traits\Visitable;
 use Webkul\Attribute\Models\AttributeFamilyProxy;
+use Webkul\Attribute\Models\AttributeOptionTranslation;
 use Webkul\Attribute\Models\AttributeProxy;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\CatalogRule\Models\CatalogRuleProductPriceProxy;
@@ -336,7 +337,7 @@ class Product extends Model implements ProductContract
             return $this->typeInstance;
         }
 
-        $this->typeInstance = app(config('product_types.'.$this->type.'.class'));
+        $this->typeInstance = app(config('product_types.' . $this->type . '.class'));
 
         if (! $this->typeInstance instanceof AbstractType) {
             throw new Exception("Please ensure the product type '{$this->type}' is configured in your application.");
@@ -367,7 +368,8 @@ class Product extends Model implements ProductContract
      */
     public function getAttribute($key)
     {
-        if (! method_exists(static::class, $key)
+        if (
+            ! method_exists(static::class, $key)
             && ! in_array($key, [
                 'pivot',
                 'parent_id',
@@ -514,5 +516,34 @@ class Product extends Model implements ProductContract
     protected static function newFactory(): Factory
     {
         return ProductFactory::new();
+    }
+
+    public function getColor($label = false)
+    {
+        $option = $this->getAttribute('color');
+
+        $attribute = AttributeProxy::find(23);
+        $option = $attribute->options()->where('id', $option)->first();
+        $swatch_value = $option->swatch_value;
+        $locale = app()->getLocale();
+        $option = AttributeOptionTranslation::where('attribute_option_id', $option->id)->where('locale', $locale)->first();
+
+        return $label ? $option?->label : $swatch_value;
+    }
+
+    public function getColorProductParent()
+    {
+        $productParent = $this->parent;
+        $products = Product::where('parent_id', $productParent->id)->get();
+
+        $colors = [];
+        $colors = collect($products)->map(function ($item) {
+            return [
+                'label' => $item->getColor(true),
+                'swatch_value' => $item->getColor(),
+            ];
+        })->unique()->values()->all();
+
+        return $colors;
     }
 }

@@ -54,7 +54,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700&display=swap">
-    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/theme.css') }}">
+
     <link rel="stylesheet" href="{{ asset('themes/shop/default/css/app.css?v=' . time()) }}">
     <style>
         #tp-widget-reviews {

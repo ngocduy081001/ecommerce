@@ -10,7 +10,9 @@
 
     <meta name="keywords" content="{{ $channel->home_seo['meta_keywords'] ?? '' }}" />
 @endPush
-
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/theme.css') }}">
+@endpush
 <x-shop::layouts>
     <!-- Page Title -->
     <x-slot:title>
@@ -55,7 +57,8 @@
 
             @case ($customization::PRODUCT_CAROUSEL)
                 <!-- Product Carousel -->
-                <x-shop::products.carousel :title="$data['title'] ?? ''" :src="route('shop.api.products.index', $data['filters'] ?? [])" :navigation-link="route('shop.search.index', $data['filters'] ?? [])" aria-label="Product Carousel" />
+                <x-shop::products.carousel :title="$data['title'] ?? ''" :src="route('shop.api.products.index', $data['filters'] ?? [])" :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
+                    aria-label="Product Carousel" />
             @break
 
             @case ($customization::CATEGORY_GRID)

@@ -19,17 +19,17 @@
     <section aria-label="(Nuværende placering)" class="Breadcrumbs">
         <div class="ContentWrapper ">
             <nav aria-label="Breadcrumbs navigation">
-                <ul itemscope="" itemtype="http://schema.org/BreadcrumbList" class="Breadcrumbs-List">
-                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-                        class="Breadcrumb"><a tabindex="0" class=" Breadcrumb-Link" href="/da-dk">
-                            <meta itemprop="item" content="https://sofacompany.com/"><span itemprop="name">Hjem</span>
+                <ul class="Breadcrumbs-List">
+                    <li itemprop="itemListElement" class="Breadcrumb"><a tabindex="0" class=" Breadcrumb-Link"
+                            href="{{ route('shop.home.index') }}">
+                            <meta itemprop="item" content="{{ route('shop.home.index') }}"><span itemprop="name">Trang
+                                chủ</span>
                             <meta itemprop="position" content="1">
                         </a></li>
-                    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"
-                        class="Breadcrumb">
+                    <li itemprop="itemListElement" class="Breadcrumb">
                         <div tabindex="-1">
-                            <meta itemprop="item" content="https://sofacompany.com/da-dk/laenestole"><span
-                                itemprop="name">Lænestole</span>
+                            <meta itemprop="item">
+                            <span itemprop="name">{{ $category->name }}</span>
                             <meta itemprop="position" content="2">
                         </div>
                     </li>
@@ -43,8 +43,9 @@
                 <div class="CategoryPage-Product-Wrapper">
                     <article class="CategoryDetails">
                         <div class="CategoryDetails-Description CategoryDetails-Description_big">
-                            <h1 class="CategoryDetails-Heading CategoryDetails-Heading_big">Lænestole</h1>
-                            <div class="CategoryDetails-CountSort"><span>Produkter: 38</span></div>
+                            <h1 class="CategoryDetails-Heading CategoryDetails-Heading_big">{{ $category->name }}</h1>
+                            <div class="CategoryDetails-CountSort"><span>Sô lượng: {{ $products->count() }}</span>
+                            </div>
                         </div>
                     </article>
                     <div class="CategoryFilterOverlay-FilterBar CategoryFilterOverlay-FilterBar_isPromotion">
@@ -57,8 +58,7 @@
                                         <button class="ExpandableContent-Button">Giá</button>
                                         <button class="ExpandableContent-Button">Màu sắc</button>
                                         <button class="ExpandableContent-Button">Chỗ ngồi</button>
-                                        <button class="ExpandableContent-Button ExpandableContent-Button_sort">Sorter
-                                            efter
+                                        <button class="ExpandableContent-Button ExpandableContent-Button_sort">Lọc theo
                                             <svg width="9px" height="12px" viewBox="0 0 9 12"
                                                 style="transform: rotate(90deg);">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -86,7 +86,8 @@
                                                         <g id="Ellipse_366" data-name="Ellipse 366"
                                                             transform="translate(325 718)" fill="#fff" stroke="#000"
                                                             stroke-width="1">
-                                                            <circle cx="12" cy="12" r="12" stroke="none">
+                                                            <circle cx="12" cy="12" r=" 12"
+                                                                stroke="none">
                                                             </circle>
                                                             <circle cx="12" cy="12" r="11.5"
                                                                 fill="none"></circle>
@@ -113,6 +114,31 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div
+                                    class="ProductConfigurableAttributes-DropDownList ProductConfigurableAttributes-DropDownList_sort">
+                                    <div class="ProductConfigurableAttributes-Option">
+                                        <div class="ProductConfigurableAttributes-Header">
+                                            <p>Sorter efter</p>
+                                        </div>
+                                        <div class="CategorySort-Simple">
+                                            <div>
+                                                <div
+                                                    class="Field Field_type_radio Field_hasValue Field_isValid CategorySort-Radio CategorySort-Radio_simple">
+                                                    <label for="DESC bestsellers"><input id="DESC bestsellers"
+                                                            name="categorysort-radio" label="Bestsellers"
+                                                            type="radio" min="1" max="99"
+                                                            validation="" message="" filename=""
+                                                            data-skip-value="false" autocomplete="off"
+                                                            class="CategorySort-Radio CategorySort-Radio_simple"
+                                                            value="DESC bestsellers" checked="">
+                                                        <div class="input-control"></div>Bestsellers
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,10 +149,9 @@
                                 <ul
                                     class="ProductListPage CategoryProductList-Page CategoryProductList-Page_layout_grid CategoryProductList-Page_smallGrid">
                                     @foreach ($products as $product)
-                                        @dd($product)
-                                        @dd($product->attribute_values->toArray())
                                         <li class="ProductCard ">
-                                            <div class="ProductCard-Box"><a class=" ProductCard-Link"
+                                            <div class="ProductCard-Box">
+                                                <a class=" ProductCard-Link"
                                                     href="{{ route('shop.product_or_category.index', $product->url_key) }}">
                                                     <figure class="ProductCard-Figure">
                                                         <div class="ProductCard-PictureHoverWrapper">
@@ -149,27 +174,17 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div
-                                                            class="ProductCard-ConfigurableOptions ProductCard-ConfigurableOptions_hasRest">
-                                                            <div
-                                                                class="ProductCard-ColorDiv ProductCard-ColorDiv_active">
-                                                                <img loading="lazy" alt="Fabric color" width="18"
-                                                                    height="18"
-                                                                    src="https://cdn.sofacompany.com/media/imagemapperUploader/images/240_Maya-Cream.jpg?width=18&amp;height=18"
-                                                                    class="ProductCard-Color">
-                                                            </div>
-                                                            <div class="ProductCard-ColorDiv"><img loading="lazy"
-                                                                    alt="Fabric color" width="18" height="18"
-                                                                    src="https://cdn.sofacompany.com/media/imagemapperUploader/images/250_Moss-Rust.jpg?width=18&amp;height=18"
-                                                                    class="ProductCard-Color"></div>
-                                                            <div class="ProductCard-ColorDiv"><img loading="lazy"
-                                                                    alt="Fabric color" width="18" height="18"
-                                                                    src="https://cdn.sofacompany.com/media/imagemapperUploader/images/261_Danny-Cream.jpg?width=18&amp;height=18"
-                                                                    class="ProductCard-Color"></div>
-                                                            <div
-                                                                class="ProductCard-ColorDiv ProductCard-ColorDiv_rest">
-                                                                +
-                                                            </div>
+
+                                                        <div class="ProductCard-ConfigurableOptions">
+
+                                                            @foreach ($product->getColorProductParent() as $color)
+                                                                <div
+                                                                    class="ProductCard-ColorDiv {{ $color['swatch_value'] == $product->getColor() ? 'ProductCard-ColorDiv_active' : '' }}">
+                                                                    <span class="ProductCard-Color"
+                                                                        style="display: inline-block; width: 24px; height: 24px; background-color: {{ $color['swatch_value'] }};"></span>
+                                                                </div>
+                                                            @endforeach
+
                                                         </div>
                                                     </figure>
                                                     <div class="ProductCard-ContentWrapper">
@@ -178,26 +193,30 @@
                                                                 <div class="ProductCard-NameWrapper">
                                                                     <p class="ProductCard-Name">{{ $product->name }}
                                                                     </p>
-                                                                    <p class="ProductCard-Name2">Lænestol</p>
-                                                                    <p class="ProductCard-Name3">Maya Cream</p>
+                                                                    <p class="ProductCard-Name2">{{ $category->name }}
+                                                                    </p>
+                                                                    <p class="ProductCard-Name3">
+                                                                        {{ $product->getColor(true) }}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="ProductCard-PriceWrapper">
-                                                            <p aria-label="Giá sản phẩm"
-                                                                class="ProductPrice ProductCard-Price">
                                                             <div class="ProductPrice-OuterWrapper">
-                                                                <div class="ProductPrice-InnerWrapper"><del
-                                                                        aria-label=""
+                                                                <div class="ProductPrice-InnerWrapper">
+                                                                    <del
                                                                         class="ProductPrice-HighPrice">{!! $product->getTypeInstance()->getPriceHtml() !!}</del>
-                                                                </div><span
-                                                                    class="ProductPrice-InnerWrapper ProductPrice-InnerWrapper_isVisible"><span>{!! $product->getTypeInstance()->getPriceHtml() !!}</span></span>
+                                                                </div>
+                                                                <span
+                                                                    class="ProductPrice-InnerWrapper ProductPrice-InnerWrapper_isVisible">
+                                                                    <span>{!! $product->getTypeInstance()->getPriceHtml() !!}</span>
+                                                                </span>
                                                             </div>
-                                                            </p>
                                                             <div class="ProductCard-DeliveryPrice">
-                                                                <a class=" "
-                                                                    href="{{ route('shop.product_or_category.index', ['fallbackPlaceholder' => $product->url_key]) }}">+
-                                                                    fragtpris</a>
+                                                                <a
+                                                                    href="{{ route('shop.product_or_category.index', ['fallbackPlaceholder' => $product->url_key]) }}">
+                                                                    Giao hàng
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>

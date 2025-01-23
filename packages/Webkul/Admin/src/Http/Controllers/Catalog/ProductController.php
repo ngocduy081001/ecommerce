@@ -137,7 +137,7 @@ class ProductController extends Controller
     public function edit(int $id)
     {
         $product = $this->productRepository->findOrFail($id);
-
+        
         return view('admin::catalog.products.edit', compact('product'));
     }
 
