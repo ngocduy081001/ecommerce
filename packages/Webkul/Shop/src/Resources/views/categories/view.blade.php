@@ -130,12 +130,95 @@
                                                             validation="" message="" filename=""
                                                             data-skip-value="false" autocomplete="off"
                                                             class="CategorySort-Radio CategorySort-Radio_simple"
-                                                            value="DESC bestsellers" checked="">
+                                                            value="ASC position">
                                                         <div class="input-control"></div>Bestsellers
                                                     </label>
                                                 </div>
                                             </div>
-
+                                            <div>
+                                                <div
+                                                    class="Field Field_type_radio Field_hasValue Field_isValid CategorySort-Radio CategorySort-Radio_simple">
+                                                    <label for="ASC position"><input id="ASC position"
+                                                            name="categorysort-radio" label="Bedste match"
+                                                            type="radio" min="1" max="99"
+                                                            validation="" message="" filename=""
+                                                            data-skip-value="false" autocomplete="off"
+                                                            class="CategorySort-Radio CategorySort-Radio_simple"
+                                                            value="ASC position" checked="">
+                                                        <div class="input-control"></div>Bedste match
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="Field Field_type_radio Field_hasValue Field_isValid CategorySort-Radio CategorySort-Radio_simple">
+                                                    <label for="ASC price"><input id="ASC price"
+                                                            name="categorysort-radio" label="Pris: Lav til Høj"
+                                                            type="radio" min="1" max="99"
+                                                            validation="" message="" filename=""
+                                                            data-skip-value="false" autocomplete="off"
+                                                            class="CategorySort-Radio CategorySort-Radio_simple"
+                                                            value="ASC position">
+                                                        <div class="input-control"></div>Pris: Lav til Høj
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="Field Field_type_radio Field_hasValue Field_isValid CategorySort-Radio CategorySort-Radio_simple">
+                                                    <label for="DESC price"><input id="DESC price"
+                                                            name="categorysort-radio" label="Pris: Høj til Lav"
+                                                            type="radio" min="1" max="99"
+                                                            validation="" message="" filename=""
+                                                            data-skip-value="false" autocomplete="off"
+                                                            class="CategorySort-Radio CategorySort-Radio_simple"
+                                                            value="ASC position">
+                                                        <div class="input-control"></div>Pris: Høj til Lav
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="Field Field_type_radio Field_hasValue Field_isValid CategorySort-Radio CategorySort-Radio_simple">
+                                                    <label for="DESC new"><input id="DESC new"
+                                                            name="categorysort-radio" label="Nyeste" type="radio"
+                                                            min="1" max="99" validation=""
+                                                            message="" filename="" data-skip-value="false"
+                                                            autocomplete="off"
+                                                            class="CategorySort-Radio CategorySort-Radio_simple"
+                                                            value="ASC position">
+                                                        <div class="input-control"></div>Nyeste
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="Field Field_type_radio Field_hasValue Field_isValid CategorySort-Radio CategorySort-Radio_simple">
+                                                    <label for="ASC name"><input id="ASC name"
+                                                            name="categorysort-radio" label="Navn: A til Å"
+                                                            type="radio" min="1" max="99"
+                                                            validation="" message="" filename=""
+                                                            data-skip-value="false" autocomplete="off"
+                                                            class="CategorySort-Radio CategorySort-Radio_simple"
+                                                            value="ASC position">
+                                                        <div class="input-control"></div>Navn: A til Å
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="Field Field_type_radio Field_hasValue Field_isValid CategorySort-Radio CategorySort-Radio_simple">
+                                                    <label for="DESC name"><input id="DESC name"
+                                                            name="categorysort-radio" label="Navn: Å til A"
+                                                            type="radio" min="1" max="99"
+                                                            validation="" message="" filename=""
+                                                            data-skip-value="false" autocomplete="off"
+                                                            class="CategorySort-Radio CategorySort-Radio_simple"
+                                                            value="ASC position">
+                                                        <div class="input-control"></div>Navn: Å til A
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

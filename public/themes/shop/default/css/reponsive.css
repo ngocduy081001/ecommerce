@@ -1,0 +1,26 @@
+.desktop {
+    display: block !important;
+}
+
+.mobile {
+    display: none !important;
+}
+
+@media (max-width: 480px) {
+    .CmsPage-Wrapper {
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+
+    .SliderWidget-Wrapper .SliderWidget {
+        height: 226px !important;
+    }
+
+    .mobile {
+        display: block !important;
+    }
+
+    .desktop {
+        display: none !important;
+    }
+}

@@ -49,13 +49,85 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/review.css') }}">
+
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700&display=swap">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/main.360da992.chunk.css') }}">
+    <link rel="stylesheet" href="https://sofacompany.my.salesforce.com/embeddedservice/5.0/esw.min.css">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/contentViewWidget.6efa68a4.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/category.b22aa80b.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/86.72a41344.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/85.f302eaff.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/8.1dfcdc27.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/73.61238dcc.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/72.2b021487.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/71.6e06cdc6.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/69.a196451e.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/61.8673a619.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/60.71add3e5.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/6.69c7e8f3.chunk.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/56.8fbd35e5.chunk.css') }}">
+    <link rel="stylesheet" href="https://static.klaviyo.com/onsite/js/532.170eaa3e699c8a134cbe.css">
+    <style>
+        .HomePage {
+            min-height: 100vh;
+        }
 
+        .HomePage .CmsPage,
+        .HomePage .CmsPage-Wrapper {
+            margin-bottom: 0;
+        }
+
+        .CmsPage-Wrapper_page_width_full {
+            max-width: 1400px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .CmsPage-Wrapper {
+            min-height: 100vh;
+            max-width: 1400px;
+            padding-left: var(--gutter);
+            padding-right: var(--gutter);
+            margin-top: calc(var(--header-total-height) + 20px);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .USPdesktop {
+            display: none;
+        }
+
+        .USPmobile {
+            display: block;
+        }
+
+        .SliderWidget {
+            height: 252px !important;
+        }
+
+        @media (min-width: calc(50.6875rem)) {
+            .CmsPage-Wrapper_page_width_full {
+                padding: 0 var(--gutter);
+            }
+
+            .USPdesktop {
+                display: block !important;
+            }
+
+            .USPmobile {
+                display: none !important;
+            }
+
+            .SliderWidget {
+                height: 575px !important;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="{{ asset('themes/shop/default/css/app.css?v=' . time()) }}">
+    <link rel="stylesheet" href="{{ asset('themes/shop/default/css/reponsive.css?v=' . time()) }}">
     <style>
         #tp-widget-reviews {
             padding: 0 40px !important;
@@ -137,6 +209,7 @@
     <script type="text/javascript">
         {!! core()->getConfigData('general.content.custom_scripts.custom_javascript') !!}
     </script>
+    <script src="https://sofacompany.com/static/js/main.d95b570d.chunk.js"></script>
 </body>
 
 </html>

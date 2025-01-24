@@ -464,3 +464,10 @@ header {
         height: 2.1rem;
     }
 }
+
+.indiana-scroll-container--hide-scrollbars {
+    overflow: hidden;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
